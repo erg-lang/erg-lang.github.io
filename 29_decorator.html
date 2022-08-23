@@ -163,14 +163,14 @@ Here are some frequently used built-in decorators.</p>
 <p>Use to override an attribute, which by default Erg will fail if you try to define an attribute that is the same as the base class.</p>
 <h2 id="impl"><a class="header" href="#impl">Impl</a></h2>
 <p>Indicates implementation of the argument trace.</p>
-<pre><code class="language-erg">Add = Trait {
+<pre><code class="language-erg">ClosedAdd = Trait {
     . `_+_` = Self.(Self) -&gt; Self
 }
-Sub = Trait {
+ClosedSub = Trait {
     . `_-_` = Self.(Self) -&gt; Self
 }
 
-C = Class({i = Int}, Impl: Add and Sub)
+C = Class({i = Int}, Impl: ClosedAdd and ClosedSub)
 C.
     @Impl Add.
     `_+_` self, other = C.new {i = self::i + other::i}
@@ -181,18 +181,18 @@ C.
 <p>Specifies the attachment patch that comes with the trait by default.
 This allows you to reproduce the same behavior as the Rust trait.</p>
 <pre><code class="language-erg"># foo.er
-Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
-}
-@Attach IntIsBinAdd, OddIsBinAdd
-BinAdd = Subsume Add(Self, Self.AddO), {
+
+Add R = Trait {
+    .`_+_` = Self.(R) -&gt; Self.AddO
     .AddO = Type
 }
+@Attach AddForInt, AddForOdd
+ClosedAdd = Subsume Add(Self)
 
-IntIsBinAdd = Patch(Int, Impl: BinAdd)
-AddO = Int
-OddIsBinAdd = Patch(Odd, Impl: BinAdd)
-OddIsBinAdd.AddO = Even
+AddForInt = Patch(Int, Impl: ClosedAdd)
+AddForInt.AddO = Int
+AddForOdd = Patch(Odd, Impl: ClosedAdd)
+AddForOdd.AddO = Even
 </code></pre>
 <p>This way, when you import traits from other modules, the attachment patch is automatically applied.</p>
 <pre><code class="language-erg"># Originally IntIsBinAdd, OddIsBinAdd must be imported at the same time, but can be omitted with attachment patch
@@ -214,7 +214,7 @@ assert Y in U.attaches
 <h2 id="test"><a class="header" href="#test">Test</a></h2>
 <p>Indicates a subroutine for tests. Test subroutines are executed with the <code>erg test</code> command.</p>
 <p align='center'>
-    <a href='. /28_spread_syntax.md'>Previous</a> | <a href='. /30_error_handling.md'>Next</a>
+    <a href='./28_spread_syntax.md'>Previous</a> | <a href='./30_error_handling.md'>Next</a>
 </p>
 
                     </main>

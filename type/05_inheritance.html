@@ -237,7 +237,7 @@ It is the responsibility of the programmer creating the derived class to correct
 <pre><code class="language-erg">Int = Class ... , Impl: Add() and ...
 </code></pre>
 <p>But in fact <code>Add()</code> in <code>Real</code> stands for <code>Add(Real, Real)</code>, and in <code>Int</code> it is just overwritten by <code>Add(Int, Int)</code>.
-They are two different traits (<code>Add</code> is a [covariate](. /advanced/variance.md), so <code>Add(Real, Real) :&gt; Add(Int, Int)</code>).</p>
+They are two different traits (<code>Add</code> is a <a href="./advanced/variance.html">covariate</a>, so <code>Add(Real, Real) :&gt; Add(Int, Int)</code>).</p>
 <h2 id="multiple-inheritance"><a class="header" href="#multiple-inheritance">Multiple Inheritance</a></h2>
 <p>Erg does not allow intersection, diff, and complement between normal classes.</p>
 <pre><code class="language-erg">Int and Str # TypeError: cannot unite classes
@@ -329,7 +329,7 @@ greet! alice # Hello, my name is Alice.
 greet! max # TypeError:
 </code></pre>
 <p align='center'>
-    <a href='. /04_class.md'>Previous</a> | <a href='. /06_nst_vs_sst.md'>Next</a>
+    <a href='./04_class.md'>Previous</a> | <a href='./06_nst_vs_sst.md'>Next</a>
 </p>
 
                     </main>

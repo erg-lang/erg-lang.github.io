@@ -142,7 +142,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="function-type-with-keyword-arguments"><a class="header" href="#function-type-with-keyword-arguments">Function type with keyword arguments</a></h1>
+<pre><code class="language-erg">h(f) = f(y: 1, x: 2)
+h: |T: Type|((y: Int, x: Int) -&gt; T) -&gt; T
+</code></pre>
+<p>The subtyping rules for functions with keyword arguments are as follows.</p>
+<pre><code class="language-erg">((x: T, y: U) -&gt; V) &lt;: ((T, U) -&gt; V) # x, y are arbitrary keyword parameters
+((y: U, x: T) -&gt; V) &lt;: ((x: T, y: U) -&gt; V)
+((x: T, y: U) -&gt; V) &lt;: ((y: U, x: T) -&gt; V)
+</code></pre>
+<p>This means that keyword arguments can be eliminated or replaced.
+However, it is not possible to do both at the same time.
+That is, <code>(x: T, y: U) -&gt; V</code> cannot be cast to <code>(U, T) -&gt; V</code>.
+Note that keyword arguments are only available in top-level tuples, not in arrays or nested tuples.</p>
+<pre><code class="language-erg">Valid: [T, U] -&gt; V
+Invalid: [x: T, y: U] -&gt; V
+Valid: (x: T, ys: (U,)) -&gt; V
+Invalid: (x: T, ys: (y: U,)) -&gt; V
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

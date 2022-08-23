@@ -146,8 +146,9 @@
 <p>A class in Erg is roughly a type that can create its own elements (instances).
 Here is an example of a simple class.</p>
 <pre><code class="language-erg">Person = Class {.name = Str; .age = Nat}
+# If `.new` is not defined, then Erg will create `Person.new = Person::__new__`
 Person.
-    new name, str = Self::__new__ {.name = name; .age = age}
+    new name, age = Self::__new__ {.name = name; .age = age}
 
 john = Person.new &quot;John Smith&quot;, 25
 print! john # &lt;Person object&gt;
@@ -348,7 +349,7 @@ assert not T &lt; C
 T.foo # AttributeError
 </code></pre>
 <p align='center'>
-    <a href='. /03_trait.md'>Previous</a> | <a href='. /05_inheritance.md'>Next</a>
+    <a href='./03_trait.md'>Previous</a> | <a href='./05_inheritance.md'>Next</a>
 </p>
 
                     </main>

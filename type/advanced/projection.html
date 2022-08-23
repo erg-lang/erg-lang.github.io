@@ -142,7 +142,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="projection-type"><a class="header" href="#projection-type">Projection Type</a></h1>
+<p>A projection type represents a type such as <code>Self.AddO</code> in the following code.</p>
+<pre><code class="language-erg">Add R = Trait {
+    . `_+_` = Self, R -&gt; Self.AddO
+    .AddO = Type
+}
+
+AddForInt = Patch(Int, Impl: Add Int)
+AddForInt.
+    AddO = Int
+</code></pre>
+<p>The type <code>Add(R)</code> can be said to be a type that defines addition with some object. Since the method should be a type attribute, the <code>+</code> type declaration should be written below the indentation.
+The mise-en-scène of the <code>Add</code> type is the declaration <code>.AddO = Type</code>, and the entity of the <code>.AddO</code> type, which is a projective type, is held by a type that is a subtype of <code>Add</code>. For example, <code>Int.AddO = Int</code>, <code>Odd.AddO = Even</code>.</p>
+<pre><code class="language-erg">assert Int &lt; Add
+assert Int.AddO == Int
+assert Odd &lt; Add
+assert Odd.AddO == Even
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

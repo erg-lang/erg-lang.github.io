@@ -142,7 +142,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="generalized-algebraic-data-types-gadts"><a class="header" href="#generalized-algebraic-data-types-gadts">Generalized Algebraic Data Types (GADTs)</a></h1>
+<p>Erg can create Generalized Algebraic Data Types (GADTs) by classifying Or (Union) types.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+Cons T = Class {head = T; rest = List T}, Impl: Unpack
+List T: Type = Class(Nil T or Cons T)
+List.
+    nil|T|() = Self(T).new Nil(T).new()
+    cons head, rest | T = Self(T).new Cons(T).new(head, rest)
+    head self = match self:
+        {head; ...} : Cons _ -&gt; head
+        _: Nil -&gt; panic &quot;empty list&quot;
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil())).head() # 1
+print! nil.head() # RuntimeError: &quot;empty list&quot;
+</code></pre>
+<p>not <code>List(T).nil() = ...</code>, but <code>List.nil|T|() = ...</code>. This is because the type specification is no longer needed when using it.</p>
+<pre><code class="language-erg">i = List.nil()
+_: List Int = cons 1, i
+</code></pre>
+<p>The <code>List T</code> defined here is a GADTs, but it is a naive implementation and does not demonstrate the true value of GADTs.
+For example, the <code>.head</code> method above will give a runtime error if the contents are empty, but this check can be done at compile time.</p>
+<pre><code class="language-erg">List: (Type, {&quot;Empty&quot;, &quot;Nonempty&quot;}) -&gt; Type
+List T, &quot;Empty&quot; = Class(Impl: Phantom T)
+List T, &quot;Nonempty&quot; = Class {head = T; rest = List(T, _)}, Impl: Unpack
+List.
+    nil|T|() = Self(T, &quot;Empty&quot;).new Nil(T).new()
+    cons head, rest | T = Self(T, &quot;Nonempty&quot;).new {head; rest}
+List(T, &quot;Nonempty&quot;).
+    head {head; ...} = head
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil())).head() # 1
+print! nil().head() # TypeError
+</code></pre>
+<p>The GADTs example often described is a list whose contents can be judged as empty or not by type, as shown above.
+Erg allows for further refinement, defining a list with length.</p>
+<pre><code class="language-erg">List: (Type, Nat) -&gt; Type
+List T, 0 = Class(Impl: Phantom T)
+List T, N = Class {head = T; rest = List(T, N-1)}, Impl: Unpack
+List.
+    nil|T|() = Self(T, 0).new Nil(T).new()
+    cons head, rest | T, N = Self(T, N).new {head; rest}
+List(_, N | N &gt;= 1).
+    head {head; ...} = head
+List(_, N | N &gt;= 2).
+    pair {head = first; rest = {head = second; ...}} = [first, second].
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil)).pair() # [1, 2].
+cons(1, nil).pair() # TypeError
+cons(1, nil).head() # 1
+print! nil.head() # TypeError
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

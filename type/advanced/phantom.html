@@ -142,7 +142,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="phantom-class"><a class="header" href="#phantom-class">Phantom class</a></h1>
+<p>Phantom types are marker traits that exist only to provide annotations to the compiler.
+As a usage of phantom types, let's look at the structure of a list.</p>
+<pre><code class="language-erg">Nil = Class()
+List T, 0 = Inherit Nil
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+</code></pre>
+<p>This code results in an error.</p>
+<pre><code class="language-erg">3 | List T, 0 = Inherit Nil
+                        ^^^
+TypeConstructionError: since Nil does not have a parameter T, it is not possible to construct List(T, 0) with Nil
+hint: use 'Phantom' trait to consume T
+</code></pre>
+<p>This error is a complaint that <code>T</code> cannot be type inferred when <code>List(_, 0).new Nil.new()</code> is used.
+In such a case, whatever the <code>T</code> type is, it must be consumed on the right-hand side. A type of size zero, such as a tuple of length zero, is convenient because it has no runtime overhead.</p>
+<pre><code class="language-erg">Nil T = Class((T; 0))
+List T, 0 = Inherit Nil T
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+</code></pre>
+<p>This code passes compilation. But it's a little tricky to understand the intent, and it can't be used except when the type argument is a type.</p>
+<p>In such a case, a phantom type is just what you need. A phantom type is a generalized type of size 0.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+List T, 0 = Inherit Nil T
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+
+nil = Nil(Int).new()
+assert nil.__size__ == 0
+</code></pre>
+<p><code>Phantom</code> holds the type <code>T</code>. But in fact the size of the <code>Phantom T</code> type is 0 and does not hold an object of type <code>T</code>.</p>
+<p>Also, <code>Phantom</code> can consume arbitrary type arguments in addition to its type. In the following example, <code>Phantom</code> holds a type argument called <code>State</code>, which is a subtype object of <code>Str</code>.
+Again, <code>State</code> is a fake type variable that does not appear in the object's entity.</p>
+<pre><code class="language-erg">VM! State: {&quot;stopped&quot;, &quot;running&quot;}! = Class(... State)
+VM!(&quot;stopped&quot;).
+    start ref! self(&quot;stopped&quot; ~&gt; &quot;running&quot;) =
+        self.do_something!()
+        self::set_phantom!(&quot;running&quot;))
+</code></pre>
+<p>The <code>state</code> is updated via the <code>update_phantom!</code> or <code>set_phantom!</code> methods.
+This is the method provided by the standard patch for <code>Phantom!</code> (the variable version of <code>Phantom</code>), and its usage is the same as the variable <code>update!</code> and <code>set!</code>.</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

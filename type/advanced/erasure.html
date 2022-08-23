@@ -142,7 +142,37 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="type-erasure"><a class="header" href="#type-erasure">Type erasure</a></h1>
+<p>Type erasure is the process of setting a type argument to <code>_</code> and deliberately discarding its information. Type erasure is a feature of many polymorphic languages, but in the context of Erg's syntax, it is more accurate to call it type argument erasure.</p>
+<p>The most common example of a type that has been type-erased is <code>[T, _]</code>. Arrays are not always known their length at compile-time. For example, <code>sys.argv</code>, which refers to command line arguments, is of type <code>[Str, _]</code>. Since Erg's compiler has no way of knowing the length of command line arguments, information about their length must be given up.
+However, a type that has been type-erased becomes a supertype of a type that has not been (e.g. <code>[T; N] &lt;: [T; _]</code>), so it can accept more objects.
+Objects of type <code>[T; N]</code> can of course use methods of type <code>[T; _]</code>, but the <code>N</code> information is erased after use. If the length does not change, then it is possible to use <code>[T; N]</code> in the signature. If the length remains the same, it must be indicated by a signature.</p>
+<pre><code class="language-erg"># Functions that are guaranteed to not change the length of the array (e.g., sort)
+f: [T; N] -&gt; [T; N] # functions that do not (f: [T; N])
+# functions that do not (e.g. filter)
+g: [T; n] -&gt; [T; _]
+</code></pre>
+<p>If you use <code>_</code> in the type specification itself, the type is upcast to <code>Object</code>.
+For non-type type arguments (Int, Bool, etc.), the parameter with <code>_</code> will be undefined.</p>
+<pre><code class="language-erg">i: _ # i: Object
+[_; _] == [Object; _] == Array
+</code></pre>
+<p>Type erasure is not the same as omitting a type specification. Once the type argument information has been erased, it will not be returned unless you assert it again.</p>
+<pre><code class="language-erg">implicit = (1..5).iter().map(i -&gt; i * 2).to_arr()
+explicit = (1..5).iter().map(i -&gt; i * 2).into(Array(Nat))
+</code></pre>
+<p>In Rust, this corresponds to the following code.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let partial = (1..6).iter().map(|i| i * 2).collect::&lt;Vec&lt;_&gt;&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<p>Erg does not allow partial omission of types, but uses higher-order kind polymorphism instead.</p>
+<pre><code class="language-erg"># collect is a higher-order Kind method that takes Kind
+hk = (1..5).iter().map(i -&gt; i * 2).collect(Array)
+hk: Array(Int)
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

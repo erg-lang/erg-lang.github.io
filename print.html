@@ -172,6 +172,24 @@ print! f(x, g y, z) # NG, can be taken to mean either `print!(x, g(y), z)` or `p
 </code></pre>
 <h2 id="scripts"><a class="header" href="#scripts">Scripts</a></h2>
 <p>Erg code is called a script. Scripts can be saved and executed in file format (.er).</p>
+<h2 id="replfile-execution"><a class="header" href="#replfile-execution">REPL/File Execution</a></h2>
+<p>To start REPL, simply type:</p>
+<pre><code class="language-sh">&gt; erg
+</code></pre>
+<p><code>&gt;</code> mark is a prompt, just type <code>erg</code>.
+Then the REPL should start.</p>
+<pre><code class="language-sh">&gt; erg
+Starting the REPL server...
+Connecting to the REPL server...
+Erg interpreter 0.2.4 (tags/?:, 2022/08/17  0:55:12.95) on x86_64/windows
+&gt;&gt;&gt;
+</code></pre>
+<p>Or you can compile from a file.</p>
+<pre><code class="language-sh">&gt; 'print! &quot;hello, world!&quot;' &gt;&gt; hello.er
+
+&gt; erg hello.er
+hello, world!
+</code></pre>
 <h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
 <p>The code after <code>#</code> is ignored as a comment. Use this to explain the intent of the code or to temporarily disable the code.</p>
 <pre><code class="language-erg"># Comment
@@ -229,7 +247,7 @@ x \
 + z
 </code></pre>
 <p align='center'>
-    Previous | <a href='. /01_literal.md'>Next</a>
+    Previous | <a href='./01_literal.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="literal"><a class="header" href="#literal">Literal</a></h1>
 <h2 id="basic-literals"><a class="header" href="#basic-literals">Basic Literals</a></h2>
@@ -241,7 +259,7 @@ x \
 </code></pre>
 <p>If a <code>Ratio</code> literal has an integer or decimal part of <code>0</code>, you can omit the <code>0</code>.</p>
 <pre><code class="language-erg">assert 1.0 == 1.
-assert 0.5 == 0.5
+assert 0.5 == .5
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: This function <code>assert</code> was used to show that <code>1.0</code> and <code>1.</code> are equal.
@@ -313,7 +331,7 @@ assert 0.0f32 == 0.0f64
 assert 1m / 1s == 1 (m/s)
 </code></pre>
 <p align='center'>
-    <a href='. /00_basic.md'>Previous</a> | <a href='. /02_name.md'>Next</a>
+    <a href='./00_basic.md'>Previous</a> | <a href='./02_name.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable"><a class="header" href="#variable">Variable</a></h1>
 <p>Variables are a type of algebra; algebra in Erg - sometimes simply referred to as variable if there is no confusion - refers to the feature to name objects and make them referable from elsewhere in the code.</p>
@@ -424,7 +442,7 @@ C = Class {i: Int}
 print! C # &lt;class C&gt;
 </code></pre>
 <p align='center'>
-    <a href='. /01_literal.md'>Previous</a> | <a href='. /03_declaration.md'>Next</a>
+    <a href='./01_literal.md'>Previous</a> | <a href='./03_declaration.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="declaration"><a class="header" href="#declaration">Declaration</a></h1>
 <p>Declaration is the syntax for specifying the type of variable to be used.
@@ -445,13 +463,11 @@ assert i in Nat # this may pass
 i: Int # this will pass
 i: Nat # this will not pass (-1 is not an element of Nat)
 </code></pre>
-<p>Functions can be declared in four different ways. None of them can omit the return type.</p>
-<pre><code class="language-erg">f(x: Int, y: Int): Int
-f(Int, Int): Int
-f: (x: Int, y: Int) -&gt; Int
+<p>Functions can be declared in 2 different ways.</p>
+<pre><code class="language-erg">f: (x: Int, y: Int) -&gt; Int
 f: (Int, Int) -&gt; Int
 </code></pre>
-<p>If you declare the argument names explicitly, a type error will result if the names are different at definition time. If you want to give the argument names arbitrary names, you can declare them in the second or fourth way. In that case, only the method name and its type will be seen by type checking.</p>
+<p>If you declare the argument names explicitly, a type error will result if the names are different at definition time. If you want to give the argument names arbitrary names, you can declare them in the second way. In that case, only the method name and its type will be seen by type checking.</p>
 <pre><code class="language-erg">T = Trait {
     .f(x: Int, y: Int): Int
 }
@@ -460,7 +476,7 @@ C = Class(U, Impl: T)
 C.f(a: Int, b: Int): Int = ... # TypeError: `.f` must be type of `(x: Int, y: Int) -&gt; Int`, not `(a: Int, b: Int) -&gt; Int`
 </code></pre>
 <p align='center'>
-    <a href='. /02_name.md'>Previous</a> | <a href='. /04_function.md'>Next</a>
+    <a href='./02_name.md'>Previous</a> | <a href='./04_function.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="function"><a class="header" href="#function">Function</a></h1>
 <p>A function is a block that takes an &quot;argument&quot;, processes it, and returns it as a &quot;return value&quot;. It is defined as follows.</p>
@@ -644,7 +660,7 @@ f((a, b)) # OK
 </code></pre>
 <p>The function type <code>T -&gt; U</code> is actually the syntax sugar of <code>(T,) -&gt; U</code>.</p>
 <p align='center'>
-    <a href='. /03_declaration.md'>Previous</a> | <a href='. /05_builtin_funcs.md'>Next</a>
+    <a href='./03_declaration.md'>Previous</a> | <a href='./05_builtin_funcs.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in functions</a></h1>
 <h2 id="if"><a class="header" href="#if">if</a></h2>
@@ -678,7 +694,7 @@ print! result # 1 (or 0)
             break s
 </code></pre>
 <p align='center'>
-    <a href='. /04_function.md'>Previous</a> | <a href='. /06_operator.md'>Next</a>
+    <a href='./04_function.md'>Previous</a> | <a href='./06_operator.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="operator"><a class="header" href="#operator">operator</a></h1>
 <p>Operators are symbols that represent operations. Operands are things to the (left) right of an operator.</p>
@@ -783,7 +799,7 @@ print! &quot;this will be printed immediately&quot;
 </code></pre>
 <p>If there is no feedback to the program, or in other words, if no external object can use the internal information, then the &quot;leakage&quot; of the information may be allowed. It is only necessary that the information not be &quot;propagated&quot;.</p>
 <p align='center'>
-    <a href='. /06_operator.md'>Previous</a> | <a href='. /08_procedure.md'>Next</a>
+    <a href='./06_operator.md'>Previous</a> | <a href='./08_procedure.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="procedures"><a class="header" href="#procedures">Procedures</a></h1>
 <p>Procedures are necessary when dealing with mutable objects, but having a mutable object as an argument does not necessarily make it a procedure.
@@ -800,7 +816,7 @@ Although in pure Erg semantics no difference can be found between objects with t
 <code>id!</code> returns a number representing this position.</p>
 <pre><code class="language-erg"></code></pre>
 <p align='center'>
-    <a href='. /08_procedure.md'>Previous</a> | <a href='. /10_array.md'>Next</a>
+    <a href='./08_procedure.md'>Previous</a> | <a href='./10_array.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="array"><a class="header" href="#array">Array</a></h1>
 <p>Arrays are the most basic <strong>collection (aggregate)</strong>.
@@ -813,6 +829,12 @@ a: [Int]
 mut_a = [!1, !2, !3]
 mut_a[0].inc!()
 assert mut_a == [2, 2, 3]
+</code></pre>
+<p>As a rule, arrays cannot contain objects of different types.</p>
+<pre><code class="language-erg.">[1, &quot;a&quot;] # TypeError: 1st element is Int, but 2nd element is Str
+</code></pre>
+<p>However, you can bypass the restriction by explicitly specifying the type like this.</p>
+<pre><code class="language-erg">[1, &quot;a&quot;]: [Int or Str].
 </code></pre>
 <h2 id="slice"><a class="header" href="#slice">Slice</a></h2>
 <p>An array can also have multiple values taken out at once. This is called slicing.</p>
@@ -829,7 +851,7 @@ assert l[..].step(2) == [2, 4]
 <pre><code class="language-erg">print! Typeof l[1..2] # [Int; 4]
 </code></pre>
 <p align='center'>
-    <a href='. /09_builtin_procs.md'>Previous</a> | <a href='. /11_dict.md'>Next</a>
+    <a href='./09_builtin_procs.md'>Previous</a> | <a href='./11_dict.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
 <p>Tuples are similar to arrays, but can hold objects of different types.
@@ -907,7 +929,7 @@ f(x=0)
 f(0)
 </code></pre>
 <p align='center'>
-    <a href='. /10_array.md'>Previous</a> | <a href='. /12_dict.md'>Next</a>
+    <a href='./10_array.md'>Previous</a> | <a href='./12_dict.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dict"><a class="header" href="#dict">Dict</a></h1>
 <p>Dict is a collection of key/value pairs.</p>
@@ -922,7 +944,7 @@ l = {[]: &quot;empty&quot;, [1]: &quot;1&quot;}
 assert l[[]] == &quot;empty&quot;
 </code></pre>
 <p>Order does not matter for Dict. It also cannot have duplicate elements. In this respect, Dict is similar to Set.
-You could say that a Dict is a Set with a key.</p>
+You could say that a Dict is a Set with values.</p>
 <pre><code class="language-erg">{&quot;Alice&quot;: 145, &quot;Bob&quot;: 214, &quot;Charlie&quot;: 301} == {&quot;Alice&quot;: 145, &quot;Charlie&quot;: 301, &quot;Bob&quot;: 214}
 </code></pre>
 <p>When generating a dict from a dict literal, it is checked for duplicate keys.
@@ -968,7 +990,7 @@ john[&quot;name&quot;] # Error: john is not subscribable
 This is because access to the value is determined at compile-time, and because dictionaries and records are different things. In other words, <code>{&quot;name&quot;: &quot;John&quot;}</code> is a Dict and <code>{name = &quot;John&quot;}</code> is a record.
 So how should we use dictionaries and records?
 In general, we recommend using records. Records have the advantages of being checked at compile-time for the existence of elements and of being able to specify _<em>visibility</em>.
-Specifying visibility is equivalent to specifying public/private in Java and other languages. For details, see [visibility](. /15_visibility.md) for details.</p>
+Specifying visibility is equivalent to specifying public/private in Java and other languages. For details, see <a href="./15_visibility.html">visibility</a> for details.</p>
 <pre><code class="language-erg">a = {x = 1; .y = x + 1}
 a.x # AttributeError: x is private
 # Hint: declare as `.x`.
@@ -1092,7 +1114,7 @@ john + 1
 # TypeError: + is not implemented for {name = Str; age = Int; .greet! = Ref(Self). () =&gt; None; inc_age! = Ref! () =&gt; None}, Int
 </code></pre>
 <p>So, in such a case, you can inherit a record class. Such a class is called a data class.
-This is described in [class](. /type/04_class.md).</p>
+This is described in <a href="./type/04_class.html">class</a>.</p>
 <pre><code class="language-erg">Person = Inherit {name = Str; age = Nat}
 Person.
     greet! ref self = print! &quot;Hello, my name is {self::name} and I am {self::age} years old.&quot;
@@ -1133,7 +1155,7 @@ Note that the set itself is different.</p>
 mut_set.insert!(4)
 </code></pre>
 <p align='center'>
-    <a href='. /13_record.md'>Previous</a> | <a href='. /15_type.md'>Next</a>
+    <a href='./13_record.md'>Previous</a> | <a href='./15_type.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="types"><a class="header" href="#types">types</a></h1>
 <p>Types are a very important feature in Erg, so we have a <a href="./type/01_type_system.html">dedicated section</a>. Please see there.</p>
@@ -1225,8 +1247,9 @@ Since types are also objects, there are attributes on the types themselves. Such
 <p>As mentioned earlier, a &quot;type&quot; in Erg roughly means a set of objects.</p>
 <p>The following is a definition of the <code>Add</code> type, which requires <code>+</code> (the middle operator). <code>R, O</code> are the so-called type parameters, which can be a true type (class) such as <code>Int</code> or <code>Str</code>. In other languages, type parameters are given a special notation (generics, templates, etc.), but in Erg they can be defined just like normal parameters.
 Type parameters can also be used for types other than type objects. For example, the array type <code>[Int; 3]</code> is a syntax sugar for <code>Array Int, 3</code>. If the type implementations overlap, the user must explicitly choose one.</p>
-<pre><code class="language-erg">Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
+<pre><code class="language-erg">Add R = Trait {
+    .AddO = Type
+    . `_+_` = Self.(R) -&gt; Self.AddO
 }
 </code></pre>
 <p>.<code>_+_</code> is an abbreviation for Add.<code>_+_</code>. The prefix operator .<code>+_</code> is a method of type <code>Num</code>.</p>
@@ -1300,7 +1323,7 @@ For example, <code>Int</code> and <code>Str</code> are both <code>Add</code>, bu
 <pre><code class="language-erg">... |R1; R2; O; A &lt;: Add(R1, O); B &lt;: Add(R2, O)|
 </code></pre>
 <p align='center'>
-    Previous | <a href='. /02_basic.md'>Next</a>
+    Previous | <a href='./02_basic.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="basic-syntax-for-types"><a class="header" href="#basic-syntax-for-types">Basic syntax for types</a></h1>
 <h2 id="type-specification"><a class="header" href="#type-specification">Type specification</a></h2>
@@ -1308,6 +1331,10 @@ For example, <code>Int</code> and <code>Str</code> are both <code>Add</code>, bu
 <pre><code class="language-erg">i: Int # Declare the variable i to be of type Int
 i: Int = 1
 j = 1 # type specification can be omitted
+</code></pre>
+<p>You can also specify a type for ordinary expressions.</p>
+<pre><code class="language-erg">i = 1: Int
+f([1, &quot;a&quot;]: [Int or Str])
 </code></pre>
 <p>For simple variable assignments, most type specifications can be omitted.
 Type specifications are more useful when defining subroutines and types.</p>
@@ -1444,19 +1471,17 @@ assert points.iter().map(x -&gt; x.norm()).collect(Array) == [5, 25].
 <p>The expansion operator <code>...</code> allows you to define a trace that contains a certain trace as a supertype. This is called the <strong>subsumption</strong> of a trace.
 In the example below, <code>BinAddSub</code> subsumes <code>BinAdd</code> and <code>BinSub</code>.
 This corresponds to Inheritance in a class, but unlike Inheritance, multiple base types can be combined using <code>and</code>. Traits that are partially excluded by <code>not</code> are also allowed.</p>
-<pre><code class="language-erg">Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
-}
-BinAdd = Subsume Add(Self, Self.AddO), {
+<pre><code class="language-erg">Add R = Trait {
     .AddO = Type
+    . `_+_` = Self.(R) -&gt; Self.AddO
 }
-Sub R, O = Trait {
-    . `_-_` = Self.(R) -&gt; O
-}
-BinSub = Subsume Sub(Self, Self.SubO), {
+
+Sub R = Trait {
     .SubO = Type
+    . `_-_` = Self.(R) -&gt; Self.SubO
 }
-BinAddSub = Subsume BinAdd(Self, Self.AddO) and BinSub(Self, Self.SubO)
+
+BinAddSub = Subsume Add(Self) and Sub(Self)
 </code></pre>
 <h2 id="structural-traits"><a class="header" href="#structural-traits">Structural Traits</a></h2>
 <p>Traits can be structured.</p>
@@ -1476,7 +1501,7 @@ assert add(C.new(1), C.new(2)) == C.new(3)
 <p>Nominal traits cannot be used simply by implementing a request method, but must be explicitly declared to have been implemented.
 In the following example, <code>add</code> cannot be used with an argument of type <code>C</code> because there is no explicit declaration of implementation. It must be <code>C = Class {i = Int}, Impl: Add</code>.</p>
 <pre><code class="language-erg">Add = Trait {
-    . `_+_` = Self.(Self) -&gt; Self.
+    .`_+_` = Self.(Self) -&gt; Self
 }
 # |A &lt;: Add| can be omitted
 add|A &lt;: Add| x, y: A = x.`_+_` y
@@ -1525,8 +1550,9 @@ In order to allow algebraic operations, traits are designed to be unable to have
 <p>A class in Erg is roughly a type that can create its own elements (instances).
 Here is an example of a simple class.</p>
 <pre><code class="language-erg">Person = Class {.name = Str; .age = Nat}
+# If `.new` is not defined, then Erg will create `Person.new = Person::__new__`
 Person.
-    new name, str = Self::__new__ {.name = name; .age = age}
+    new name, age = Self::__new__ {.name = name; .age = age}
 
 john = Person.new &quot;John Smith&quot;, 25
 print! john # &lt;Person object&gt;
@@ -1727,7 +1753,7 @@ assert not T &lt; C
 T.foo # AttributeError
 </code></pre>
 <p align='center'>
-    <a href='. /03_trait.md'>Previous</a> | <a href='. /05_inheritance.md'>Next</a>
+    <a href='./03_trait.md'>Previous</a> | <a href='./05_inheritance.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h1>
 <p>Inheritance allows you to define a new class that adds functionality or specialization to an existing class.
@@ -1824,7 +1850,7 @@ It is the responsibility of the programmer creating the derived class to correct
 <pre><code class="language-erg">Int = Class ... , Impl: Add() and ...
 </code></pre>
 <p>But in fact <code>Add()</code> in <code>Real</code> stands for <code>Add(Real, Real)</code>, and in <code>Int</code> it is just overwritten by <code>Add(Int, Int)</code>.
-They are two different traits (<code>Add</code> is a [covariate](. /advanced/variance.md), so <code>Add(Real, Real) :&gt; Add(Int, Int)</code>).</p>
+They are two different traits (<code>Add</code> is a <a href="type/./advanced/variance.html">covariate</a>, so <code>Add(Real, Real) :&gt; Add(Int, Int)</code>).</p>
 <h2 id="multiple-inheritance"><a class="header" href="#multiple-inheritance">Multiple Inheritance</a></h2>
 <p>Erg does not allow intersection, diff, and complement between normal classes.</p>
 <pre><code class="language-erg">Int and Str # TypeError: cannot unite classes
@@ -1916,7 +1942,7 @@ greet! alice # Hello, my name is Alice.
 greet! max # TypeError:
 </code></pre>
 <p align='center'>
-    <a href='. /04_class.md'>Previous</a> | <a href='. /06_nst_vs_sst.md'>Next</a>
+    <a href='./04_class.md'>Previous</a> | <a href='./06_nst_vs_sst.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="patch"><a class="header" href="#patch">Patch</a></h1>
 <p>Erg does not allow modification of existing types and classes.
@@ -2090,7 +2116,7 @@ Point3D = Class {x = Int; y = Int; z = Int}
 assert Point3D.new({x = 1; y = 2; z = 3}).norm() == 14 # AssertionError:
 </code></pre>
 <p align='center'>
-    <a href='. /06_nst_vs_sst.md'>Previous</a> | <a href='. /08_value.md'>Next</a>
+    <a href='./06_nst_vs_sst.md'>Previous</a> | <a href='./08_value.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="value-type"><a class="header" href="#value-type">Value Type</a></h1>
 <p>Value types are Erg built-in types that can be evaluated at compile time, specifically:</p>
@@ -2583,15 +2609,14 @@ Below we will review the immutable/mutable semantics of the built-in collection 
 </code></pre>
 <p>Of course, it is not necessary to memorize and use all of these.
 For variable array types, all you have to do is append <code>!</code>, and for practical use, <code>[T; N]</code>, <code>[T!; N]</code>, <code>[T; !N]</code>, and <code>[T!; !N]</code> can cover most cases.</p>
-<p>These array types are sugar-coated constructions, and the actual types are as follows.</p>
-<pre><code class="language-erg"># There are actually five types.
-[T; N] = ArrayWithLength(T, N)
-[T!; N] = ArrayWithLength!(T!, N)
-[T; !N] = ArrayWithMutLength!(T, !N)
-[!T; N] = ArrayWithMutType!
-[!T; !N] = ArrayWithMutTypeAndLength!
-[T!; !N] = ArrayWithMutLength!
-[!T!; N] = ArrayWithMutType!
+<p>These array types are sugar-coated, and the actual types are as follows.</p>
+<pre><code class="language-erg"># There are actually 4 types.
+[T; N] = Array(T, N)
+[T; !N] = Array!(T, !N)
+[!T; N] = ArrayWithMutType!(!T, N)
+[!T; !N] = ArrayWithMutTypeAndLength!(!T, !N)
+[T!; !N] = Array!(T!, !N)
+[!T!; N] = ArrayWithMutType!(!T!, N)
 [!T!; !N] = ArrayWithMutTypeAndLength!(!T!, !N)
 </code></pre>
 <p>Note that type changeable means this.</p>
@@ -2655,7 +2680,360 @@ And in the case of type <code>T!</code>, which has no internal structure, this i
 <hr />
 <p><span id="1" style="font-size:x-small"><sup>1</sup> It is intentional that <code>T!</code> and <code>T</code> types have no special linguistic relationship. It is a design. If there is a relationship, for example, if the <code>T</code>/<code>T!</code> type exists in the namespace, it will not be possible to introduce the <code>T!</code>/<code>T</code> type from another module. Also, the mutable type is not uniquely defined for the immutable type. Given the definition <code>T = (U, V)</code>, the possible variable subtypes of <code>T!</code> are <code>(U!, V)</code> and <code>(U, V!)</code>. <a href="type/18_mut.html#f1">↩</a></span></p>
 <div style="break-before: page; page-break-before: always;"></div><p>The following sections describe more advanced type systems. Beginners do not need to read the entire section.</p>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="quantified-dependent-type"><a class="header" href="#quantified-dependent-type">Quantified Dependent Type</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="function-type-with-default-parameter"><a class="header" href="#function-type-with-default-parameter">Function type with default parameter</a></h1>
+<p>First, let's look at an example of the use of default parameters.</p>
+<pre><code class="language-erg">f: (Int, Int, z |= Int) -&gt; Int
+f(x, y, z |= 0) = x + y + z
+
+g: (Int, Int, z |= Int, w |= Int) -&gt; Int
+g(x, y, z |= 0, w |= 1) = x + y + z + w
+
+fold: ((Int, Int) -&gt; Int, [Int], acc |= Int) -&gt; Int
+fold(f, [], acc) = acc
+fold(f, arr, acc |= 0) = fold(f, arr[1...]) , f(acc, arr[0]))
+assert fold(f, [1, 2, 3]) == 6
+assert fold(g, [1, 2, 3]) == 8
+</code></pre>
+<p>The parameters after <code>|=</code> are default parameters.
+The subtyping rules are as follows.</p>
+<pre><code class="language-erg">((X, y |= Y) -&gt; Z) &lt;: (X -&gt; Z)
+((X, y |= Y, ...) -&gt; Z) -&gt; Z) &lt;: ((X, ...) -&gt; Z)
+</code></pre>
+<p>The first means that a function with a default parameter is identical to a function without it.
+The second means that any default parameter can be omitted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="type-erasure"><a class="header" href="#type-erasure">Type erasure</a></h1>
+<p>Type erasure is the process of setting a type argument to <code>_</code> and deliberately discarding its information. Type erasure is a feature of many polymorphic languages, but in the context of Erg's syntax, it is more accurate to call it type argument erasure.</p>
+<p>The most common example of a type that has been type-erased is <code>[T, _]</code>. Arrays are not always known their length at compile-time. For example, <code>sys.argv</code>, which refers to command line arguments, is of type <code>[Str, _]</code>. Since Erg's compiler has no way of knowing the length of command line arguments, information about their length must be given up.
+However, a type that has been type-erased becomes a supertype of a type that has not been (e.g. <code>[T; N] &lt;: [T; _]</code>), so it can accept more objects.
+Objects of type <code>[T; N]</code> can of course use methods of type <code>[T; _]</code>, but the <code>N</code> information is erased after use. If the length does not change, then it is possible to use <code>[T; N]</code> in the signature. If the length remains the same, it must be indicated by a signature.</p>
+<pre><code class="language-erg"># Functions that are guaranteed to not change the length of the array (e.g., sort)
+f: [T; N] -&gt; [T; N] # functions that do not (f: [T; N])
+# functions that do not (e.g. filter)
+g: [T; n] -&gt; [T; _]
+</code></pre>
+<p>If you use <code>_</code> in the type specification itself, the type is upcast to <code>Object</code>.
+For non-type type arguments (Int, Bool, etc.), the parameter with <code>_</code> will be undefined.</p>
+<pre><code class="language-erg">i: _ # i: Object
+[_; _] == [Object; _] == Array
+</code></pre>
+<p>Type erasure is not the same as omitting a type specification. Once the type argument information has been erased, it will not be returned unless you assert it again.</p>
+<pre><code class="language-erg">implicit = (1..5).iter().map(i -&gt; i * 2).to_arr()
+explicit = (1..5).iter().map(i -&gt; i * 2).into(Array(Nat))
+</code></pre>
+<p>In Rust, this corresponds to the following code.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let partial = (1..6).iter().map(|i| i * 2).collect::&lt;Vec&lt;_&gt;&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<p>Erg does not allow partial omission of types, but uses higher-order kind polymorphism instead.</p>
+<pre><code class="language-erg"># collect is a higher-order Kind method that takes Kind
+hk = (1..5).iter().map(i -&gt; i * 2).collect(Array)
+hk: Array(Int)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="existential-type"><a class="header" href="#existential-type">Existential type</a></h1>
+<p>If there is a for-all type corresponding to ∀, it is natural to assume that there is an existential type corresponding to ∃.
+Existential types are not difficult. You already know the existential type, just not consciously aware of it as such.</p>
+<pre><code class="language-erg">T: Trait
+f x: T = ...
+</code></pre>
+<p>The trait <code>T</code> above is used as the existential type.
+In contrast, <code>T</code> in the lower case is only a trait, and <code>X</code> is an for-all type.</p>
+<pre><code class="language-erg">f|X &lt;: T| x: X = ...
+</code></pre>
+<p>In fact, the existential type is replaced by an for-all type. So why is there such a thing as an existential type?
+First of all, as we saw above, existential types do not involve type variables, which simplifies type specification.
+Also, since the type variable can be removed, it is possible to construct a type that would have rank 2 or higher if it were an all-presumptive type.</p>
+<pre><code class="language-erg">show_map f: (|T| T -&gt; T), arr: [Show; _] =
+    arr.map x -&gt;
+        y = f x
+        log y
+        y
+</code></pre>
+<p>However, as you can see, the existential type forgets or expands the original type, so if you do not want to expand the return type, you must use the for-all type.
+Conversely, types that are only taken as arguments and are not relevant to the return value may be written as existential types.</p>
+<pre><code class="language-erg"># id(1): I want it to be Int
+id|T|(x: T): T = x
+# |S &lt;: Show|(s: S) -&gt; () is redundant
+show(s: Show): () = log s
+</code></pre>
+<p>By the way, a class is not called an existential type. A class is not called an existential type, because its elemental objects are predefined.
+Existential type means any type that satisfies a certain trait, and it is not the place to know what type is actually assigned.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generalized-algebraic-data-types-gadts"><a class="header" href="#generalized-algebraic-data-types-gadts">Generalized Algebraic Data Types (GADTs)</a></h1>
+<p>Erg can create Generalized Algebraic Data Types (GADTs) by classifying Or (Union) types.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+Cons T = Class {head = T; rest = List T}, Impl: Unpack
+List T: Type = Class(Nil T or Cons T)
+List.
+    nil|T|() = Self(T).new Nil(T).new()
+    cons head, rest | T = Self(T).new Cons(T).new(head, rest)
+    head self = match self:
+        {head; ...} : Cons _ -&gt; head
+        _: Nil -&gt; panic &quot;empty list&quot;
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil())).head() # 1
+print! nil.head() # RuntimeError: &quot;empty list&quot;
+</code></pre>
+<p>not <code>List(T).nil() = ...</code>, but <code>List.nil|T|() = ...</code>. This is because the type specification is no longer needed when using it.</p>
+<pre><code class="language-erg">i = List.nil()
+_: List Int = cons 1, i
+</code></pre>
+<p>The <code>List T</code> defined here is a GADTs, but it is a naive implementation and does not demonstrate the true value of GADTs.
+For example, the <code>.head</code> method above will give a runtime error if the contents are empty, but this check can be done at compile time.</p>
+<pre><code class="language-erg">List: (Type, {&quot;Empty&quot;, &quot;Nonempty&quot;}) -&gt; Type
+List T, &quot;Empty&quot; = Class(Impl: Phantom T)
+List T, &quot;Nonempty&quot; = Class {head = T; rest = List(T, _)}, Impl: Unpack
+List.
+    nil|T|() = Self(T, &quot;Empty&quot;).new Nil(T).new()
+    cons head, rest | T = Self(T, &quot;Nonempty&quot;).new {head; rest}
+List(T, &quot;Nonempty&quot;).
+    head {head; ...} = head
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil())).head() # 1
+print! nil().head() # TypeError
+</code></pre>
+<p>The GADTs example often described is a list whose contents can be judged as empty or not by type, as shown above.
+Erg allows for further refinement, defining a list with length.</p>
+<pre><code class="language-erg">List: (Type, Nat) -&gt; Type
+List T, 0 = Class(Impl: Phantom T)
+List T, N = Class {head = T; rest = List(T, N-1)}, Impl: Unpack
+List.
+    nil|T|() = Self(T, 0).new Nil(T).new()
+    cons head, rest | T, N = Self(T, N).new {head; rest}
+List(_, N | N &gt;= 1).
+    head {head; ...} = head
+List(_, N | N &gt;= 2).
+    pair {head = first; rest = {head = second; ...}} = [first, second].
+{nil; cons; ...} = List
+
+print! cons(1, cons(2, nil)).pair() # [1, 2].
+cons(1, nil).pair() # TypeError
+cons(1, nil).head() # 1
+print! nil.head() # TypeError
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="function-type-with-keyword-arguments"><a class="header" href="#function-type-with-keyword-arguments">Function type with keyword arguments</a></h1>
+<pre><code class="language-erg">h(f) = f(y: 1, x: 2)
+h: |T: Type|((y: Int, x: Int) -&gt; T) -&gt; T
+</code></pre>
+<p>The subtyping rules for functions with keyword arguments are as follows.</p>
+<pre><code class="language-erg">((x: T, y: U) -&gt; V) &lt;: ((T, U) -&gt; V) # x, y are arbitrary keyword parameters
+((y: U, x: T) -&gt; V) &lt;: ((x: T, y: U) -&gt; V)
+((x: T, y: U) -&gt; V) &lt;: ((y: U, x: T) -&gt; V)
+</code></pre>
+<p>This means that keyword arguments can be eliminated or replaced.
+However, it is not possible to do both at the same time.
+That is, <code>(x: T, y: U) -&gt; V</code> cannot be cast to <code>(U, T) -&gt; V</code>.
+Note that keyword arguments are only available in top-level tuples, not in arrays or nested tuples.</p>
+<pre><code class="language-erg">Valid: [T, U] -&gt; V
+Invalid: [x: T, y: U] -&gt; V
+Valid: (x: T, ys: (U,)) -&gt; V
+Invalid: (x: T, ys: (y: U,)) -&gt; V
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="kind"><a class="header" href="#kind">Kind</a></h1>
+<p>Everything is typed in Erg. Types themselves are no exception. <strong>kind</strong> represents the “type of type”. For example, <code>Int</code> belongs to <code>Type</code>, just as <code>1</code> belongs to <code>Int</code>. <code>Type</code> is the simplest kind, the <strong>atomic kind</strong>. In type-theoretic notation, <code>Type</code> corresponds to <code>*</code>.</p>
+<p>In the concept of kind, what is practically important is one or more kinds (multinomial kind). One-term kind, for example <code>Option</code>, belongs to it. A unary kind is represented as <code>Type -&gt; Type</code> <a href="type/advanced/kind.html#1"><sup id="f1">1</sup></a>. A <strong>container</strong> such as <code>Array</code> or <code>Option</code> is specifically a polynomial kind that takes a type as an argument.
+As the notation <code>Type -&gt; Type</code> indicates, <code>Option</code> is actually a function that receives a type <code>T</code> and returns a type <code>Option T</code>. However, since this function is not a function in the usual sense, it is usually called the unary kind.</p>
+<p>Note that <code>-&gt;</code> itself, which is an anonymous function operator, can also be seen as a kind when it receives a type and returns a type.</p>
+<p>Also note that a kind that is not an atomic kind is not a type. Just as <code>-1</code> is a number but <code>-</code> is not, <code>Option Int</code> is a type but <code>Option</code> is not. <code>Option</code> etc. are sometimes called type constructors.</p>
+<pre><code class="language-erg">assert not Option in Type
+assert Option in Type -&gt; Type
+</code></pre>
+<p>So code like the following will result in an error:
+In Erg, methods can only be defined in atomic kinds, and the name <code>self</code> cannot be used anywhere other than the first argument of a method.</p>
+<pre><code class="language-erg">#K is an unary kind
+K: Type -&gt; Type
+K T = Class...
+K.
+    foo x = ... # OK, this is like a so-called static method
+    bar self, x = ... # TypeError: cannot define a method to a non-type object
+K(T).
+    baz self, x = ... # OK
+</code></pre>
+<p>Examples of binary or higher kinds are <code>{T: U}</code>(: <code>(Type, Type) -&gt; Type</code>), <code>(T, U, V)</code>(: <code>(Type, Type, Type) - &gt; Type</code>), ... and so on.</p>
+<p>There is also a zero-term kind <code>() -&gt; Type</code>. This is sometimes equated with an atomic kind in type theory, but is distinguished in Erg. An example is <code>Class</code>.</p>
+<pre><code class="language-erg">Nil = Class()
+</code></pre>
+<h2 id="containment-of-kind"><a class="header" href="#containment-of-kind">Containment of kind</a></h2>
+<p>There is also a partial type relation, or rather a partial kind relation, between multinomial kinds.</p>
+<pre><code class="language-erg">K T = ...
+L = Inherit K
+L &lt;: K
+</code></pre>
+<p>That is, for any <code>T</code>, if <code>L T &lt;: K T</code>, then <code>L &lt;: K</code>, and vice versa.</p>
+<pre><code class="language-console">∀T. L T &lt;: K T &lt;=&gt; L &lt;: K
+</code></pre>
+<h2 id="higher-order-kind"><a class="header" href="#higher-order-kind">Higher-order Kind</a></h2>
+<p>There is also a higher-order kind. This is a kind of the same concept as a higher-order function, a kind that receives a kind itself. <code>(Type -&gt; Type) -&gt; Type</code> is a higher kind. Let's define an object that belongs to a higher kind.</p>
+<pre><code class="language-erg">IntContainerOf K: Type -&gt; Type = K Int
+assert IntContainerOf Option == Option Int
+assert IntContainerOf Result == Result Int
+assert IntContainerOf in (Type -&gt; Type) -&gt; Type
+</code></pre>
+<p>The bound variables of a polynomial kind are usually denoted as K, L, ..., where K is K for Kind.</p>
+<h2 id="set-kind"><a class="header" href="#set-kind">Set kind</a></h2>
+<p>In type theory, there is the concept of a record. This is almost the same as the Erg record <a href="type/advanced/kind.html#2"><sup id="f2">2</sup></a>.</p>
+<pre><code class="language-erg"># This is a record, and it corresponds to what is called a record in type theory
+{x = 1; y = 2}
+</code></pre>
+<p>When all record values ​​were types, it was a kind of type called a record type.</p>
+<pre><code class="language-erg">assert {x = 1; y = 2} in {x = Int; y = Int}
+</code></pre>
+<p>A record type types a record. A good guesser might have thought that there should be a &quot;record kind&quot; to type the record type. Actually it exists.</p>
+<pre><code class="language-erg">log Typeof {x = Int; y = Int} # {{x = Int; y = Int}}
+</code></pre>
+<p>A type like <code>{{x = Int; y = Int}}</code> is a record kind. This is not a special notation. It is simply an enumeration type that has only <code>{x = Int; y = Int}</code> as an element.</p>
+<pre><code class="language-erg">Point = {x = Int; y = Int}
+Pointy = {Point}
+</code></pre>
+<p>An important property of record kind is that if <code>T: |T|</code> and <code>U &lt;: T</code> then <code>U: |T|</code>.
+This is also evident from the fact that enums are actually syntactic sugar for sieve types.</p>
+<pre><code class="language-erg"># {c} == {X: T | X == c} for normal objects, but
+# Equality may not be defined for types, so |T| == {X | X &lt;: T}
+{Point} == {P | P &lt;: Point}
+</code></pre>
+<p><code>U &lt;: T</code> in type constraints is actually syntactic sugar for <code>U: |T|</code>.
+A kind that is a set of such types is commonly called a set kind. Setkind also appears in the Iterator pattern.</p>
+<pre><code class="language-erg">Iterable T = Trait {
+    .Iterator = {Iterator}
+    .iter = Self(T).() -&gt; Self.Iterator T
+}
+</code></pre>
+<h2 id="type-inference-for-polynomial-kinds"><a class="header" href="#type-inference-for-polynomial-kinds">Type inference for polynomial kinds</a></h2>
+<pre><code class="language-erg">Container K: Type -&gt; Type, T: Type = Patch K(T, T)
+Container (K).
+    f self = ...
+Option T: Type = Patch T or NoneType
+Option(T).
+    f self = ...
+Fn T: Type = Patch T -&gt; T
+Fn(T).
+    f self = ...
+Fn2 T, U: Type = Patch T -&gt; U
+Fn2(T, U).
+    f self = ...
+
+(Int -&gt; Int).f() # which one is selected?
+</code></pre>
+<p>In the example above, which patch would the method <code>f</code> choose?
+Naively, <code>Fn T</code> seems to be chosen, but <code>Fn2 T, U</code> is also possible, <code>Option T</code> includes <code>T</code> as it is, so any type is applicable, <code>Container K , T</code> also matches <code> `-&gt;`(Int, Int)</code>, i.e. <code>Container(`-&gt;`, Int)</code> as ```Int -&gt; Int`. So all four patches above are possible options.</p>
+<p>In this case, patches are selected according to the following priority criteria.</p>
+<ul>
+<li>Any <code>K(T)</code> (e.g. <code>T or NoneType</code>) preferentially matches <code>Type -&gt; Type</code> over <code>Type</code>.</li>
+<li>Any <code>K(T, U)</code> (e.g. <code>T -&gt; U</code>) matches <code>(Type, Type) -&gt; Type</code> preferentially over <code>Type</code>.
+*Similar criteria apply for kind of 3 or more.</li>
+<li>The one that requires fewer type variables to replace is chosen. For example, <code>Int -&gt; Int</code> is <code>T -&gt; T</code> rather than <code>K(T, T)</code> (replacement type variables: K, T) or <code>T -&gt; U</code> (replacement type variables: T, U). `(replacement type variable: T) is matched preferentially.</li>
+<li>If the number of replacements is also the same, an error is given as being unselectable.</li>
+</ul>
+<hr />
+<p><span id="1" style="font-size:x-small"><sup>1</sup> In type theory notation, <code>*=&gt;*</code> <a href="type/advanced/kind.html#f1">↩</a></span></p>
+<p><span id="2" style="font-size:x-small"><sup>2</sup> There are subtle differences such as visibility. <a href="type/advanced/kind.html#f2">↩</a></span></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="marker-trait"><a class="header" href="#marker-trait">Marker Trait</a></h1>
+<p>A marker trait is a trait with no required attributes. That is, it can be Impl without implementing a method.
+It may seem meaningless without the required attribute, but it registers the information that it belongs to that trait, so that patch methods can be used and the compiler can give it special treatment.</p>
+<p>All marker traits are encompassed by the <code>Marker</code> trait.
+The <code>Light</code> provided in the standard is a kind of <code>marker</code> trace.</p>
+<pre><code class="language-erg">Light = Subsume Marker
+</code></pre>
+<pre><code class="language-erg">Person = Class {.name = Str; .age = Nat} and Light
+</code></pre>
+<pre><code class="language-erg">M = Subsume Marker
+
+MarkedInt = Inherit Int, Impl: M
+
+i = MarkedInt.new(2)
+assert i + 1 == 2
+assert i in M
+</code></pre>
+<p>The marker class can also be removed with the <code>Excluding</code> argument.</p>
+<pre><code class="language-erg">NInt = Inherit MarkedInt, Impl: N, Excluding: M
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mutable-structure-type"><a class="header" href="#mutable-structure-type">Mutable Structure Type</a></h1>
+<p>The <code>T!</code> type is described as a box type that can be replaced by any <code>T</code> type object.</p>
+<pre><code class="language-erg">Particle!State: {&quot;base&quot;, &quot;excited&quot;}! = Class(... Impl: Phantom State)
+Particle!
+    # This method moves the State from &quot;base&quot; to &quot;excited&quot;.
+    apply_electric_field!(ref! self(&quot;base&quot; ~&gt; &quot;excited&quot;), field: Vector) = ...
+</code></pre>
+<p>The <code>T!</code> type can replace data, but it cannot change its structure.
+More like the behavior of a real program, it cannot change its size (on the heap). Such a type is called an immutable structure (mutable) type.</p>
+<p>In fact, there are data structures that cannot be represented by invariant structure types.
+For example, a Mutable-length array. The <code>[T; N]!</code>type can contain objects of any <code>[T; N]</code>, but cannot be replaced by objects of type <code>[T; N+1]</code> and so on.</p>
+<p>In other words, the length cannot be changed. To change the length, the structure of the type itself must be changed.</p>
+<p>This is achieved by Mutable structure (mutable) types.</p>
+<pre><code class="language-erg">v = [Str; !0].new()
+v.push! &quot;Hello&quot;
+v: [Str; !1].
+</code></pre>
+<p>For mutable structure types, Mutable type arguments are marked with <code>!</code>. In the above case, the type <code>[Str; !0]</code> can be changed to <code>[Str; !1]</code> and so on. That is, the length can be changed.
+Incidentally, the <code>[T; !N]</code> type is the sugar-coated syntax of the <code>ArrayWithLength!(T, !N)</code> type.</p>
+<p>Mutable structure types can of course be user-defined. Note, however, that there are some differences from invariant structure types in terms of the construction method.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+List T, !0 = Inherit Nil T
+List T, N: Nat! = Class {head = T; rest = List(T, !N-1)}
+List(T, !N).
+    push! ref! self(N ~&gt; N+1, ...), head: T =
+        self.update! old -&gt; Self.new {head; old}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="phantom-class"><a class="header" href="#phantom-class">Phantom class</a></h1>
+<p>Phantom types are marker traits that exist only to provide annotations to the compiler.
+As a usage of phantom types, let's look at the structure of a list.</p>
+<pre><code class="language-erg">Nil = Class()
+List T, 0 = Inherit Nil
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+</code></pre>
+<p>This code results in an error.</p>
+<pre><code class="language-erg">3 | List T, 0 = Inherit Nil
+                        ^^^
+TypeConstructionError: since Nil does not have a parameter T, it is not possible to construct List(T, 0) with Nil
+hint: use 'Phantom' trait to consume T
+</code></pre>
+<p>This error is a complaint that <code>T</code> cannot be type inferred when <code>List(_, 0).new Nil.new()</code> is used.
+In such a case, whatever the <code>T</code> type is, it must be consumed on the right-hand side. A type of size zero, such as a tuple of length zero, is convenient because it has no runtime overhead.</p>
+<pre><code class="language-erg">Nil T = Class((T; 0))
+List T, 0 = Inherit Nil T
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+</code></pre>
+<p>This code passes compilation. But it's a little tricky to understand the intent, and it can't be used except when the type argument is a type.</p>
+<p>In such a case, a phantom type is just what you need. A phantom type is a generalized type of size 0.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+List T, 0 = Inherit Nil T
+List T, N: Nat = Class {head = T; rest = List(T, N-1)}
+
+nil = Nil(Int).new()
+assert nil.__size__ == 0
+</code></pre>
+<p><code>Phantom</code> holds the type <code>T</code>. But in fact the size of the <code>Phantom T</code> type is 0 and does not hold an object of type <code>T</code>.</p>
+<p>Also, <code>Phantom</code> can consume arbitrary type arguments in addition to its type. In the following example, <code>Phantom</code> holds a type argument called <code>State</code>, which is a subtype object of <code>Str</code>.
+Again, <code>State</code> is a fake type variable that does not appear in the object's entity.</p>
+<pre><code class="language-erg">VM! State: {&quot;stopped&quot;, &quot;running&quot;}! = Class(... State)
+VM!(&quot;stopped&quot;).
+    start ref! self(&quot;stopped&quot; ~&gt; &quot;running&quot;) =
+        self.do_something!()
+        self::set_phantom!(&quot;running&quot;))
+</code></pre>
+<p>The <code>state</code> is updated via the <code>update_phantom!</code> or <code>set_phantom!</code> methods.
+This is the method provided by the standard patch for <code>Phantom!</code> (the variable version of <code>Phantom</code>), and its usage is the same as the variable <code>update!</code> and <code>set!</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="projection-type"><a class="header" href="#projection-type">Projection Type</a></h1>
+<p>A projection type represents a type such as <code>Self.AddO</code> in the following code.</p>
+<pre><code class="language-erg">Add R = Trait {
+    . `_+_` = Self, R -&gt; Self.AddO
+    .AddO = Type
+}
+
+AddForInt = Patch(Int, Impl: Add Int)
+AddForInt.
+    AddO = Int
+</code></pre>
+<p>The type <code>Add(R)</code> can be said to be a type that defines addition with some object. Since the method should be a type attribute, the <code>+</code> type declaration should be written below the indentation.
+The mise-en-scène of the <code>Add</code> type is the declaration <code>.AddO = Type</code>, and the entity of the <code>.AddO</code> type, which is a projective type, is held by a type that is a subtype of <code>Add</code>. For example, <code>Int.AddO = Int</code>, <code>Odd.AddO = Even</code>.</p>
+<pre><code class="language-erg">assert Int &lt; Add
+assert Int.AddO == Int
+assert Odd &lt; Add
+assert Odd.AddO == Even
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quantified-dependent-type"><a class="header" href="#quantified-dependent-type">Quantified Dependent Type</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="iterator"><a class="header" href="#iterator">Iterator</a></h1>
 <p>An iterator is an object used to retrieve elements of a container.</p>
 <pre><code class="language-erg">for! 0..9, i =&gt;
@@ -3050,7 +3428,7 @@ This is used when calling the API (FFI) of other languages such as Python.</p>
 'test 1: pass x to y'()
 </code></pre>
 <p align='center'>
-    <a href='. /19_visibility.md'>Previous</a> | <a href='. /21_lambda.md'>Next</a>
+    <a href='./19_visibility.md'>Previous</a> | <a href='./21_lambda.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="anonymous-function"><a class="header" href="#anonymous-function">Anonymous Function</a></h1>
 <p>An anonymous function is a syntax for creating function objects on the fly without naming them.</p>
@@ -3116,7 +3494,7 @@ match res2:
 id = |T| x: T -&gt; x
 </code></pre>
 <p align='center'>
-    <a href='. /20_naming_rule.md'>Previous</a> | <a href='. /22_subroutine.md'>Next</a>
+    <a href='./20_naming_rule.md'>Previous</a> | <a href='./22_subroutine.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="subroutine-signatures"><a class="header" href="#subroutine-signatures">Subroutine Signatures</a></h1>
 <h2 id="func"><a class="header" href="#func">Func</a></h2>
@@ -3154,7 +3532,7 @@ For methods that do not have <code>ref!</code>, i.e., are deprived of ownership 
 `-_`(x: Foo) = Foo.new(-x.a)
 </code></pre>
 <p align='center'>
-    <a href='. /21_lambda.md'>Previous</a> | <a href='. /23_scope.md'>Next</a>
+    <a href='./21_lambda.md'>Previous</a> | <a href='./23_scope.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="closure"><a class="header" href="#closure">Closure</a></h1>
 <p>Erg subroutines have a &quot;closure&quot; feature that captures external variables.</p>
@@ -3222,7 +3600,7 @@ assert sum == 45
 </code></pre>
 <p>Erg is designed to be a natural and concise description of programming with invariant objects.</p>
 <p align='center'>
-    <a href='. /22_subroutine.md'>Previous</a> | <a href='. /24_module.md'>Next</a>
+    <a href='./22_subroutine.md'>Previous</a> | <a href='./24_module.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="module"><a class="header" href="#module">module</a></h1>
 <p>Erg allows you to think of the file itself as a single record. This is called a module.</p>
@@ -3397,6 +3775,9 @@ The non-unique form is non-trivial, whether it works correctly or is equivalent 
 <h4 id="set-1"><a class="header" href="#set-1">Set</a></h4>
 <p>There is no pattern for sets. There is no pattern for sets because there is no way to retrieve elements uniquely.
 They can be retrieved with an iterator, but the order is not guaranteed.</p>
+<p align='center'>
+    <a href='./25_object_system.md'>Previous</a> | <a href='./27_comprehension.md'>Next</a>
+</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="comprehension"><a class="header" href="#comprehension">Comprehension</a></h1>
 <p>An array can be created by <code>[expr | (name &lt;- iterable)+ (predicate)*]</code>,
 And a set can be created by <code>{expr | (name &lt;- iterable)+ (predicate)*}</code>.</p>
@@ -3432,7 +3813,7 @@ In the case of a refinement type, Name is limited to one and the layout cannot b
 Nat2D = {(I, J): (Int, Int) | I &gt;= 0 and J &gt;= 0}
 </code></pre>
 <p align='center'>
-    <a href='. /26_pattern_matching.md'>Previous</a> | <a href='. /28_spread_syntax.md'>Next</a>
+    <a href='./26_pattern_matching.md'>Previous</a> | <a href='./28_spread_syntax.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="spread-assignment"><a class="header" href="#spread-assignment">Spread assignment</a></h1>
 <p>In a spread assignment, a variable can be prefixed with <code>...</code> in front of the variable, all the remaining elements can be expanded into the variable. This is called a spread assignment.</p>
@@ -3459,7 +3840,7 @@ Extract assignment is a useful syntax for bringing certain attributes local to a
 assert x == 1 and y == 2
 </code></pre>
 <p align='center'>
-    <a href='. /27_comprehension.md'>Previous</a> | <a href='. /29_decorator.md'>Next</a>
+    <a href='./27_comprehension.md'>Previous</a> | <a href='./29_decorator.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="decorator"><a class="header" href="#decorator">Decorator</a></h1>
 <p>Decorators are used to add or make explicit a specific state or behavior for a type or function.
@@ -3482,14 +3863,14 @@ Here are some frequently used built-in decorators.</p>
 <p>Use to override an attribute, which by default Erg will fail if you try to define an attribute that is the same as the base class.</p>
 <h2 id="impl"><a class="header" href="#impl">Impl</a></h2>
 <p>Indicates implementation of the argument trace.</p>
-<pre><code class="language-erg">Add = Trait {
+<pre><code class="language-erg">ClosedAdd = Trait {
     . `_+_` = Self.(Self) -&gt; Self
 }
-Sub = Trait {
+ClosedSub = Trait {
     . `_-_` = Self.(Self) -&gt; Self
 }
 
-C = Class({i = Int}, Impl: Add and Sub)
+C = Class({i = Int}, Impl: ClosedAdd and ClosedSub)
 C.
     @Impl Add.
     `_+_` self, other = C.new {i = self::i + other::i}
@@ -3500,18 +3881,18 @@ C.
 <p>Specifies the attachment patch that comes with the trait by default.
 This allows you to reproduce the same behavior as the Rust trait.</p>
 <pre><code class="language-erg"># foo.er
-Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
-}
-@Attach IntIsBinAdd, OddIsBinAdd
-BinAdd = Subsume Add(Self, Self.AddO), {
+
+Add R = Trait {
+    .`_+_` = Self.(R) -&gt; Self.AddO
     .AddO = Type
 }
+@Attach AddForInt, AddForOdd
+ClosedAdd = Subsume Add(Self)
 
-IntIsBinAdd = Patch(Int, Impl: BinAdd)
-AddO = Int
-OddIsBinAdd = Patch(Odd, Impl: BinAdd)
-OddIsBinAdd.AddO = Even
+AddForInt = Patch(Int, Impl: ClosedAdd)
+AddForInt.AddO = Int
+AddForOdd = Patch(Odd, Impl: ClosedAdd)
+AddForOdd.AddO = Even
 </code></pre>
 <p>This way, when you import traits from other modules, the attachment patch is automatically applied.</p>
 <pre><code class="language-erg"># Originally IntIsBinAdd, OddIsBinAdd must be imported at the same time, but can be omitted with attachment patch
@@ -3533,7 +3914,7 @@ assert Y in U.attaches
 <h2 id="test"><a class="header" href="#test">Test</a></h2>
 <p>Indicates a subroutine for tests. Test subroutines are executed with the <code>erg test</code> command.</p>
 <p align='center'>
-    <a href='. /28_spread_syntax.md'>Previous</a> | <a href='. /30_error_handling.md'>Next</a>
+    <a href='./28_spread_syntax.md'>Previous</a> | <a href='./30_error_handling.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h1>
 <p>Mainly uses Result type.
@@ -3615,7 +3996,7 @@ Unrecoverable errors are errors caused by external factors such as software/hard
 <pre><code class="language-erg">panic &quot;something went wrong!&quot;
 </code></pre>
 <p align='center'>
-    <a href='. /29_decorator.md'>Previous</a> | <a href='. /31_pipeline.md'>Next</a>
+    <a href='./29_decorator.md'>Previous</a> | <a href='./31_pipeline.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pipeline-operator"><a class="header" href="#pipeline-operator">Pipeline Operator</a></h1>
 <p>The pipeline operator is used like this:</p>
@@ -3677,7 +4058,7 @@ assert foo.bar(1) in Int
 </code></pre>
 <p>Since this is a runtime overhead, a project is planned to statically type analyze Python scripts with Erg's type system.</p>
 <p align='center'>
-    <a href='. /31_pipeline.md'>Previous</a> | <a href='. /33_package_system.md'>Next</a>
+    <a href='./31_pipeline.md'>Previous</a> | <a href='./33_package_system.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="package-system"><a class="header" href="#package-system">Package System</a></h1>
 <p>Erg packages can be roughly classified into the app package, which is the application, and the lib package, which is the library.
@@ -3687,7 +4068,7 @@ The entry point for the lib package is <code>src/lib.er</code>. Importing a pack
 <p>In order for a directory to be recognized as a module, it is necessary to place a <code>(directory name).er</code> file in the directory.
 This is similar to Python's <code>__init__.py</code>, but unlike <code>__init__.py</code>, it is placed outside the directory.</p>
 <p>As an example, consider the following directory structure.</p>
-<pre><code class="language-console">└─┬ . /src
+<pre><code class="language-console">└─┬ ./src
   ├─ app.er
   ├─ foo.er
   ├─ bar.er
@@ -3710,11 +4091,11 @@ main args =
 <p>Note the <code>/</code> delimiter for accessing submodules. This is because there can be file names such as <code>bar.baz.er</code>.
 Such filenames are discouraged, since the <code>.er</code> prefix is meaningful in Erg.
 For example, a module for testing. A file ending with <code>.test.er</code> is a (white box) test module, which executes a subroutine decorated with <code>@Test</code> when the test is run.</p>
-<pre><code class="language-console">└─┬ . /src
+<pre><code class="language-console">└─┬ ./src
   ├─ app.er
   ├─ foo.er
   └─ foo.test.er
-. /src
+./src
 
 ```erg
 # app.er
@@ -3740,7 +4121,7 @@ bar.baz # AttributeError: module 'baz' is private
 baz = import &quot;baz&quot;
 </code></pre>
 <p align='center'>
-    <a href='. /32_integration_with_Python.md'>Previous</a> | <a href='. /34_generator.md'>Next</a>
+    <a href='./32_integration_with_Python.md'>Previous</a> | <a href='./34_generator.md'>Next</a>
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="generator"><a class="header" href="#generator">Generator</a></h1>
 <p>Generators are special procedures that use the <code>yield!</code> procedure in a block.</p>
@@ -3764,6 +4145,9 @@ assert g!() == 3
     yield! 3
 make_g: () =&gt; Generator!
 </code></pre>
+<p align='center'>
+    <a href='./33_package_system.md'>Previous</a> | Next
+</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="index"><a class="header" href="#index">Index</a></h1>
 <p>For APIs not in this index, see <a href="./API/index.html">here</a>.
 For the meaning of terms, see <a href="./dev_guide/terms.html">here</a> for the meaning of terms.</p>

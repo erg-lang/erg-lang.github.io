@@ -150,7 +150,7 @@ The entry point for the lib package is <code>src/lib.er</code>. Importing a pack
 <p>In order for a directory to be recognized as a module, it is necessary to place a <code>(directory name).er</code> file in the directory.
 This is similar to Python's <code>__init__.py</code>, but unlike <code>__init__.py</code>, it is placed outside the directory.</p>
 <p>As an example, consider the following directory structure.</p>
-<pre><code class="language-console">└─┬ . /src
+<pre><code class="language-console">└─┬ ./src
   ├─ app.er
   ├─ foo.er
   ├─ bar.er
@@ -173,11 +173,11 @@ main args =
 <p>Note the <code>/</code> delimiter for accessing submodules. This is because there can be file names such as <code>bar.baz.er</code>.
 Such filenames are discouraged, since the <code>.er</code> prefix is meaningful in Erg.
 For example, a module for testing. A file ending with <code>.test.er</code> is a (white box) test module, which executes a subroutine decorated with <code>@Test</code> when the test is run.</p>
-<pre><code class="language-console">└─┬ . /src
+<pre><code class="language-console">└─┬ ./src
   ├─ app.er
   ├─ foo.er
   └─ foo.test.er
-. /src
+./src
 
 ```erg
 # app.er
@@ -203,7 +203,7 @@ bar.baz # AttributeError: module 'baz' is private
 baz = import &quot;baz&quot;
 </code></pre>
 <p align='center'>
-    <a href='. /32_integration_with_Python.md'>Previous</a> | <a href='. /34_generator.md'>Next</a>
+    <a href='./32_integration_with_Python.md'>Previous</a> | <a href='./34_generator.md'>Next</a>
 </p>
 
                     </main>

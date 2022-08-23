@@ -154,6 +154,12 @@ mut_a = [!1, !2, !3]
 mut_a[0].inc!()
 assert mut_a == [2, 2, 3]
 </code></pre>
+<p>As a rule, arrays cannot contain objects of different types.</p>
+<pre><code class="language-erg.">[1, &quot;a&quot;] # TypeError: 1st element is Int, but 2nd element is Str
+</code></pre>
+<p>However, you can bypass the restriction by explicitly specifying the type like this.</p>
+<pre><code class="language-erg">[1, &quot;a&quot;]: [Int or Str].
+</code></pre>
 <h2 id="slice"><a class="header" href="#slice">Slice</a></h2>
 <p>An array can also have multiple values taken out at once. This is called slicing.</p>
 <pre><code class="language-erg">l = [1, 2, 3, 4]
@@ -169,7 +175,7 @@ assert l[..].step(2) == [2, 4]
 <pre><code class="language-erg">print! Typeof l[1..2] # [Int; 4]
 </code></pre>
 <p align='center'>
-    <a href='. /09_builtin_procs.md'>Previous</a> | <a href='. /11_dict.md'>Next</a>
+    <a href='./09_builtin_procs.md'>Previous</a> | <a href='./11_dict.md'>Next</a>
 </p>
 
                     </main>

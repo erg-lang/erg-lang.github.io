@@ -176,19 +176,17 @@ assert points.iter().map(x -&gt; x.norm()).collect(Array) == [5, 25].
 <p>The expansion operator <code>...</code> allows you to define a trace that contains a certain trace as a supertype. This is called the <strong>subsumption</strong> of a trace.
 In the example below, <code>BinAddSub</code> subsumes <code>BinAdd</code> and <code>BinSub</code>.
 This corresponds to Inheritance in a class, but unlike Inheritance, multiple base types can be combined using <code>and</code>. Traits that are partially excluded by <code>not</code> are also allowed.</p>
-<pre><code class="language-erg">Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
-}
-BinAdd = Subsume Add(Self, Self.AddO), {
+<pre><code class="language-erg">Add R = Trait {
     .AddO = Type
+    . `_+_` = Self.(R) -&gt; Self.AddO
 }
-Sub R, O = Trait {
-    . `_-_` = Self.(R) -&gt; O
-}
-BinSub = Subsume Sub(Self, Self.SubO), {
+
+Sub R = Trait {
     .SubO = Type
+    . `_-_` = Self.(R) -&gt; Self.SubO
 }
-BinAddSub = Subsume BinAdd(Self, Self.AddO) and BinSub(Self, Self.SubO)
+
+BinAddSub = Subsume Add(Self) and Sub(Self)
 </code></pre>
 <h2 id="structural-traits"><a class="header" href="#structural-traits">Structural Traits</a></h2>
 <p>Traits can be structured.</p>
@@ -208,7 +206,7 @@ assert add(C.new(1), C.new(2)) == C.new(3)
 <p>Nominal traits cannot be used simply by implementing a request method, but must be explicitly declared to have been implemented.
 In the following example, <code>add</code> cannot be used with an argument of type <code>C</code> because there is no explicit declaration of implementation. It must be <code>C = Class {i = Int}, Impl: Add</code>.</p>
 <pre><code class="language-erg">Add = Trait {
-    . `_+_` = Self.(Self) -&gt; Self.
+    .`_+_` = Self.(Self) -&gt; Self
 }
 # |A &lt;: Add| can be omitted
 add|A &lt;: Add| x, y: A = x.`_+_` y

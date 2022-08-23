@@ -142,7 +142,28 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="function-type-with-default-parameter"><a class="header" href="#function-type-with-default-parameter">Function type with default parameter</a></h1>
+<p>First, let's look at an example of the use of default parameters.</p>
+<pre><code class="language-erg">f: (Int, Int, z |= Int) -&gt; Int
+f(x, y, z |= 0) = x + y + z
+
+g: (Int, Int, z |= Int, w |= Int) -&gt; Int
+g(x, y, z |= 0, w |= 1) = x + y + z + w
+
+fold: ((Int, Int) -&gt; Int, [Int], acc |= Int) -&gt; Int
+fold(f, [], acc) = acc
+fold(f, arr, acc |= 0) = fold(f, arr[1...]) , f(acc, arr[0]))
+assert fold(f, [1, 2, 3]) == 6
+assert fold(g, [1, 2, 3]) == 8
+</code></pre>
+<p>The parameters after <code>|=</code> are default parameters.
+The subtyping rules are as follows.</p>
+<pre><code class="language-erg">((X, y |= Y) -&gt; Z) &lt;: (X -&gt; Z)
+((X, y |= Y, ...) -&gt; Z) -&gt; Z) &lt;: ((X, ...) -&gt; Z)
+</code></pre>
+<p>The first means that a function with a default parameter is identical to a function without it.
+The second means that any default parameter can be omitted.</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

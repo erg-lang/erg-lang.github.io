@@ -171,6 +171,24 @@ print! f(x, g y, z) # NG, can be taken to mean either `print!(x, g(y), z)` or `p
 </code></pre>
 <h2 id="scripts"><a class="header" href="#scripts">Scripts</a></h2>
 <p>Erg code is called a script. Scripts can be saved and executed in file format (.er).</p>
+<h2 id="replfile-execution"><a class="header" href="#replfile-execution">REPL/File Execution</a></h2>
+<p>To start REPL, simply type:</p>
+<pre><code class="language-sh">&gt; erg
+</code></pre>
+<p><code>&gt;</code> mark is a prompt, just type <code>erg</code>.
+Then the REPL should start.</p>
+<pre><code class="language-sh">&gt; erg
+Starting the REPL server...
+Connecting to the REPL server...
+Erg interpreter 0.2.4 (tags/?:, 2022/08/17  0:55:12.95) on x86_64/windows
+&gt;&gt;&gt;
+</code></pre>
+<p>Or you can compile from a file.</p>
+<pre><code class="language-sh">&gt; 'print! &quot;hello, world!&quot;' &gt;&gt; hello.er
+
+&gt; erg hello.er
+hello, world!
+</code></pre>
 <h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
 <p>The code after <code>#</code> is ignored as a comment. Use this to explain the intent of the code or to temporarily disable the code.</p>
 <pre><code class="language-erg"># Comment
@@ -228,7 +246,7 @@ x \
 + z
 </code></pre>
 <p align='center'>
-    Previous | <a href='. /01_literal.md'>Next</a>
+    Previous | <a href='./01_literal.md'>Next</a>
 </p>
 
                     </main>

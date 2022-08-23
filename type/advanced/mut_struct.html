@@ -142,7 +142,34 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="mutable-structure-type"><a class="header" href="#mutable-structure-type">Mutable Structure Type</a></h1>
+<p>The <code>T!</code> type is described as a box type that can be replaced by any <code>T</code> type object.</p>
+<pre><code class="language-erg">Particle!State: {&quot;base&quot;, &quot;excited&quot;}! = Class(... Impl: Phantom State)
+Particle!
+    # This method moves the State from &quot;base&quot; to &quot;excited&quot;.
+    apply_electric_field!(ref! self(&quot;base&quot; ~&gt; &quot;excited&quot;), field: Vector) = ...
+</code></pre>
+<p>The <code>T!</code> type can replace data, but it cannot change its structure.
+More like the behavior of a real program, it cannot change its size (on the heap). Such a type is called an immutable structure (mutable) type.</p>
+<p>In fact, there are data structures that cannot be represented by invariant structure types.
+For example, a Mutable-length array. The <code>[T; N]!</code>type can contain objects of any <code>[T; N]</code>, but cannot be replaced by objects of type <code>[T; N+1]</code> and so on.</p>
+<p>In other words, the length cannot be changed. To change the length, the structure of the type itself must be changed.</p>
+<p>This is achieved by Mutable structure (mutable) types.</p>
+<pre><code class="language-erg">v = [Str; !0].new()
+v.push! &quot;Hello&quot;
+v: [Str; !1].
+</code></pre>
+<p>For mutable structure types, Mutable type arguments are marked with <code>!</code>. In the above case, the type <code>[Str; !0]</code> can be changed to <code>[Str; !1]</code> and so on. That is, the length can be changed.
+Incidentally, the <code>[T; !N]</code> type is the sugar-coated syntax of the <code>ArrayWithLength!(T, !N)</code> type.</p>
+<p>Mutable structure types can of course be user-defined. Note, however, that there are some differences from invariant structure types in terms of the construction method.</p>
+<pre><code class="language-erg">Nil T = Class(Impl: Phantom T)
+List T, !0 = Inherit Nil T
+List T, N: Nat! = Class {head = T; rest = List(T, !N-1)}
+List(T, !N).
+    push! ref! self(N ~&gt; N+1, ...), head: T =
+        self.update! old -&gt; Self.new {head; old}
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

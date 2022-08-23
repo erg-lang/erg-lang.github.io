@@ -142,7 +142,27 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="marker-trait"><a class="header" href="#marker-trait">Marker Trait</a></h1>
+<p>A marker trait is a trait with no required attributes. That is, it can be Impl without implementing a method.
+It may seem meaningless without the required attribute, but it registers the information that it belongs to that trait, so that patch methods can be used and the compiler can give it special treatment.</p>
+<p>All marker traits are encompassed by the <code>Marker</code> trait.
+The <code>Light</code> provided in the standard is a kind of <code>marker</code> trace.</p>
+<pre><code class="language-erg">Light = Subsume Marker
+</code></pre>
+<pre><code class="language-erg">Person = Class {.name = Str; .age = Nat} and Light
+</code></pre>
+<pre><code class="language-erg">M = Subsume Marker
+
+MarkedInt = Inherit Int, Impl: M
+
+i = MarkedInt.new(2)
+assert i + 1 == 2
+assert i in M
+</code></pre>
+<p>The marker class can also be removed with the <code>Excluding</code> argument.</p>
+<pre><code class="language-erg">NInt = Inherit MarkedInt, Impl: N, Excluding: M
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

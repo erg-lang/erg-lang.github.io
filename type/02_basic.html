@@ -149,6 +149,10 @@
 i: Int = 1
 j = 1 # type specification can be omitted
 </code></pre>
+<p>You can also specify a type for ordinary expressions.</p>
+<pre><code class="language-erg">i = 1: Int
+f([1, &quot;a&quot;]: [Int or Str])
+</code></pre>
 <p>For simple variable assignments, most type specifications can be omitted.
 Type specifications are more useful when defining subroutines and types.</p>
 <pre><code class="language-erg"># Type specification for parameters

@@ -227,8 +227,9 @@ Since types are also objects, there are attributes on the types themselves. Such
 <p>As mentioned earlier, a &quot;type&quot; in Erg roughly means a set of objects.</p>
 <p>The following is a definition of the <code>Add</code> type, which requires <code>+</code> (the middle operator). <code>R, O</code> are the so-called type parameters, which can be a true type (class) such as <code>Int</code> or <code>Str</code>. In other languages, type parameters are given a special notation (generics, templates, etc.), but in Erg they can be defined just like normal parameters.
 Type parameters can also be used for types other than type objects. For example, the array type <code>[Int; 3]</code> is a syntax sugar for <code>Array Int, 3</code>. If the type implementations overlap, the user must explicitly choose one.</p>
-<pre><code class="language-erg">Add R, O = Trait {
-    . `_+_` = Self.(R) -&gt; O
+<pre><code class="language-erg">Add R = Trait {
+    .AddO = Type
+    . `_+_` = Self.(R) -&gt; Self.AddO
 }
 </code></pre>
 <p>.<code>_+_</code> is an abbreviation for Add.<code>_+_</code>. The prefix operator .<code>+_</code> is a method of type <code>Num</code>.</p>
@@ -302,7 +303,7 @@ For example, <code>Int</code> and <code>Str</code> are both <code>Add</code>, bu
 <pre><code class="language-erg">... |R1; R2; O; A &lt;: Add(R1, O); B &lt;: Add(R2, O)|
 </code></pre>
 <p align='center'>
-    Previous | <a href='. /02_basic.md'>Next</a>
+    Previous | <a href='./02_basic.md'>Next</a>
 </p>
 
                     </main>
