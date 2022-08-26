@@ -1,1 +1,0 @@
-# Quantified Dependent Type
