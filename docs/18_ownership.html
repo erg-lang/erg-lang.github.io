@@ -220,9 +220,7 @@ This means that it is not possible to pack references into arrays or create clas
 <p>However, such restrictions are common in languages without references, so they are not that inconvenient.</p>
 <h2 id="circular-references"><a class="header" href="#circular-references">Circular references</a></h2>
 <p>Erg is designed to prevent unintentional memory leaks, and the memory checker will generate an error when it detects a circular reference. In most cases, this error can be resolved with a weak reference <code>Weak</code>. However, this does not allow the creation of objects with circular structures such as cyclic graphs, so we plan to implement an API that can create circular references as an unsafe operation.</p>
-<p align='center'>
-    <a href='./17_mutability.md'>Previous</a> | <a href='./19_visibility.md'>Next</a>
-</p>
+
 
                     </main>
 

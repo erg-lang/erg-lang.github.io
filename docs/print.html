@@ -246,9 +246,7 @@ x \
 + y \
 + z
 </code></pre>
-<p align='center'>
-    Previous | <a href='./01_literal.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="literal"><a class="header" href="#literal">Literal</a></h1>
 <h2 id="basic-literals"><a class="header" href="#basic-literals">Basic Literals</a></h2>
 <h3 id="int-literal"><a class="header" href="#int-literal">Int Literal</a></h3>
@@ -330,9 +328,7 @@ assert 0.0f32 == 0.0f64
 <pre><code class="language-erg"># same as `assert (1*m) / (1*s) == 1*(m/s)`
 assert 1m / 1s == 1 (m/s)
 </code></pre>
-<p align='center'>
-    <a href='./00_basic.md'>Previous</a> | <a href='./02_name.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable"><a class="header" href="#variable">Variable</a></h1>
 <p>Variables are a type of algebra; algebra in Erg - sometimes simply referred to as variable if there is no confusion - refers to the feature to name objects and make them referable from elsewhere in the code.</p>
 <p>A variable is defined as follows.
@@ -441,9 +437,7 @@ print! g # &lt;function g&gt;
 C = Class {i: Int}
 print! C # &lt;class C&gt;
 </code></pre>
-<p align='center'>
-    <a href='./01_literal.md'>Previous</a> | <a href='./03_declaration.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="declaration"><a class="header" href="#declaration">Declaration</a></h1>
 <p>Declaration is the syntax for specifying the type of variable to be used.
 Declarations can be made anywhere in the code, but declarations alone do not refer to the variables. They must be initialized.
@@ -475,9 +469,7 @@ f: (Int, Int) -&gt; Int
 C = Class(U, Impl: T)
 C.f(a: Int, b: Int): Int = ... # TypeError: `.f` must be type of `(x: Int, y: Int) -&gt; Int`, not `(a: Int, b: Int) -&gt; Int`
 </code></pre>
-<p align='center'>
-    <a href='./02_name.md'>Previous</a> | <a href='./04_function.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="function"><a class="header" href="#function">Function</a></h1>
 <p>A function is a block that takes an &quot;argument&quot;, processes it, and returns it as a &quot;return value&quot;. It is defined as follows.</p>
 <pre><code class="language-erg">add x, y = x + y
@@ -659,9 +651,7 @@ f(a, b) # TypeError: f() takes 1 positional argument but 2 were given
 f((a, b)) # OK
 </code></pre>
 <p>The function type <code>T -&gt; U</code> is actually the syntax sugar of <code>(T,) -&gt; U</code>.</p>
-<p align='center'>
-    <a href='./03_declaration.md'>Previous</a> | <a href='./05_builtin_funcs.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in functions</a></h1>
 <h2 id="if"><a class="header" href="#if">if</a></h2>
 <p><code>if</code> is a function that changes processing depending on a condition.</p>
@@ -693,9 +683,7 @@ print! result # 1 (or 0)
         if pat.match(s).is_some():
             break s
 </code></pre>
-<p align='center'>
-    <a href='./04_function.md'>Previous</a> | <a href='./06_operator.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="operator"><a class="header" href="#operator">operator</a></h1>
 <p>Operators are symbols that represent operations. Operands are things to the (left) right of an operator.</p>
 <p>Operators are a kind of function, and thus are themselves first-class objects that can be bound to variables. When binding, it is necessary to enclose it with ``.
@@ -714,9 +702,7 @@ assert g(1, 2) == 2
 function = `-&gt;` # SyntaxError: cannot bind `-&gt;` operator, this is a special form
 # NG: function x, x + 1
 </code></pre>
-<p align='center'>
-    <a href='./05_builtin_funcs.md'>Previous</a> | <a href='./07_side_effect.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="side-effects-and-procedures"><a class="header" href="#side-effects-and-procedures">Side effects and procedures</a></h1>
 <p>We have been neglecting to explain the meaning of the <code>!</code>, but now its meaning will finally be revealed. This <code>!</code> indicates that this object is a &quot;procedure&quot; with a &quot;side-effect&quot;. A procedure is a function with a side-effect.</p>
 <pre><code class="language-erg">f x = print! x # EffectError: functions cannot be assigned objects with side effects
@@ -798,26 +784,20 @@ print! &quot;this will be printed immediately&quot;
 # this will be printed after execution
 </code></pre>
 <p>If there is no feedback to the program, or in other words, if no external object can use the internal information, then the &quot;leakage&quot; of the information may be allowed. It is only necessary that the information not be &quot;propagated&quot;.</p>
-<p align='center'>
-    <a href='./06_operator.md'>Previous</a> | <a href='./08_procedure.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="procedures"><a class="header" href="#procedures">Procedures</a></h1>
 <p>Procedures are necessary when dealing with mutable objects, but having a mutable object as an argument does not necessarily make it a procedure.
 Here is a function takes a mutable object (not procedure).</p>
 <pre><code class="language-erg">peek_str s: Str! = log s
 </code></pre>
-<p align='center'>
-    <a href='./07_side_effect.md'>Previous</a> | <a href='./09_builtin_procs.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="built-in-procedure"><a class="header" href="#built-in-procedure">Built-in procedure</a></h1>
 <h2 id="id"><a class="header" href="#id">id!</a></h2>
 <p>Returns the unique identification number of the object.
 Although in pure Erg semantics no difference can be found between objects with the same structure, in practice objects have different locations in memory.
 <code>id!</code> returns a number representing this position.</p>
 <pre><code class="language-erg"></code></pre>
-<p align='center'>
-    <a href='./08_procedure.md'>Previous</a> | <a href='./10_array.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="array"><a class="header" href="#array">Array</a></h1>
 <p>Arrays are the most basic <strong>collection (aggregate)</strong>.
 A collection is an object that can hold multiple objects inside it.</p>
@@ -850,9 +830,7 @@ assert l[..].step(2) == [2, 4]
 <p>The object obtained by slicing is an (immutable) copy to an array.</p>
 <pre><code class="language-erg">print! Typeof l[1..2] # [Int; 4]
 </code></pre>
-<p align='center'>
-    <a href='./09_builtin_procs.md'>Previous</a> | <a href='./11_dict.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tuple"><a class="header" href="#tuple">Tuple</a></h1>
 <p>Tuples are similar to arrays, but can hold objects of different types.
 Such a collection is called an unequal collection. In contrast, homogeneous collections include arrays, sets, etc.</p>
@@ -928,9 +906,7 @@ f(y=1, x=0)
 f(x=0)
 f(0)
 </code></pre>
-<p align='center'>
-    <a href='./10_array.md'>Previous</a> | <a href='./12_dict.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dict"><a class="header" href="#dict">Dict</a></h1>
 <p>Dict is a collection of key/value pairs.</p>
 <pre><code class="language-erg">ids = {&quot;Alice&quot;: 145, &quot;Bob&quot;: 214, &quot;Charlie&quot;: 301}
@@ -972,9 +948,7 @@ invalid2 = {1: &quot;a&quot;, 2: 2}
 valid1: {Int or Str: Str} = {1: &quot;a&quot;, &quot;a&quot;: &quot;b&quot;}
 valid2: {Int: Int or Str} = {1: &quot;a&quot;, 2: 2}
 </code></pre>
-<p align='center'>
-    <a href='./11_tuple.md'>Previous</a> | <a href='./13_record.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="record"><a class="header" href="#record">Record</a></h1>
 <p>A record is a collection that combines the properties of a Dict accessed by key and a tuple whose access is inspected at compile time.
 If you know JavaScript, think of it as a (more enhanced) kind of object literal notation.</p>
@@ -1124,9 +1098,7 @@ john = Person.new {name = &quot;John Smith&quot;; age = 20}
 john + 1
 # TypeError: + is not implemented for Person, Int
 </code></pre>
-<p align='center'>
-    <a href='./12_tuple.md'>Previous</a> | <a href='./14_set.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="set"><a class="header" href="#set">Set</a></h1>
 <p>A set is an unordered array with no duplicates.</p>
 <pre><code class="language-erg">assert Set.from([1, 2, 3, 2, 1]) == {1, 2, 3}
@@ -1154,14 +1126,10 @@ Note that the set itself is different.</p>
 <pre><code class="language-erg">mut_set = {1, 2, 3}.into {Int; !3}
 mut_set.insert!(4)
 </code></pre>
-<p align='center'>
-    <a href='./13_record.md'>Previous</a> | <a href='./15_type.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="types"><a class="header" href="#types">types</a></h1>
 <p>Types are a very important feature in Erg, so we have a <a href="./type/01_type_system.html">dedicated section</a>. Please see there.</p>
-<p align='center'>
-     <a href='./14_set.md'>Previous</a> | <a href='./16_iterator.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ergs-type-system"><a class="header" href="#ergs-type-system">Erg's Type System</a></h1>
 <p>The following is a brief description of Erg's type system. Details are explained in other sections.</p>
 <h2 id="how-to-define"><a class="header" href="#how-to-define">How to define</a></h2>
@@ -1322,9 +1290,7 @@ For example, <code>Int</code> and <code>Str</code> are both <code>Add</code>, bu
 <p>Also, the types <code>A</code> and <code>B</code> below are not considered the same type. However, the type <code>O</code> is considered to match.</p>
 <pre><code class="language-erg">... |R1; R2; O; A &lt;: Add(R1, O); B &lt;: Add(R2, O)|
 </code></pre>
-<p align='center'>
-    Previous | <a href='./02_basic.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="basic-syntax-for-types"><a class="header" href="#basic-syntax-for-types">Basic syntax for types</a></h1>
 <h2 id="type-specification"><a class="header" href="#type-specification">Type specification</a></h2>
 <p>In Erg, the type of a variable can be specified after <code>:</code> as follows. This can be done at the same time as an assignment.</p>
@@ -1434,9 +1400,7 @@ Point2D = {x = Int; y = Int}
 Point3D = {.... Point2D; z = Int}
 Point = {x = Int; y = Int; z = Int} # TypeWarning: duplicate aliases: Point3D and Point
 </code></pre>
-<p align='center'>
-    <a href='./01_type_system.md'>Previous</a> | <a href='./03_trait.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trait"><a class="header" href="#trait">Trait</a></h1>
 <p>Trait is a nominal type that adds a type attribute requirement to record types.
 It is similar to the Abstract Base Class (ABC) in Python, but with the distinction of being able to perform algebraic operations.</p>
@@ -1543,9 +1507,7 @@ SafeDiv R, O = Subsume Div, {
 <h2 id="appendix-differences-from-rust-traits"><a class="header" href="#appendix-differences-from-rust-traits">Appendix: Differences from Rust traits</a></h2>
 <p>Erg's trait is faithful to the one proposed by <a href="https://www.ptidej.net/courses/ift6251/fall06/presentations/061122/061122.doc.pdf">Schärli et al.</a>.
 In order to allow algebraic operations, traits are designed to be unable to have method implementations directory, but can be patched if necessary.</p>
-<p align='center'>
-    <a href='./02_basic.md'>Previous</a> | <a href='./04_class.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="class"><a class="header" href="#class">Class</a></h1>
 <p>A class in Erg is roughly a type that can create its own elements (instances).
 Here is an example of a simple class.</p>
@@ -1752,9 +1714,7 @@ assert C.foo == foo
 assert not T &lt; C
 T.foo # AttributeError
 </code></pre>
-<p align='center'>
-    <a href='./03_trait.md'>Previous</a> | <a href='./05_inheritance.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h1>
 <p>Inheritance allows you to define a new class that adds functionality or specialization to an existing class.
 Inheritance is similar to inclusion in a trace. The inherited class becomes a subtype of the original class.</p>
@@ -1941,9 +1901,7 @@ structural_greet! john # Hello, my name is John.
 greet! alice # Hello, my name is Alice.
 greet! max # TypeError:
 </code></pre>
-<p align='center'>
-    <a href='./04_class.md'>Previous</a> | <a href='./06_nst_vs_sst.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="patch"><a class="header" href="#patch">Patch</a></h1>
 <p>Erg does not allow modification of existing types and classes.
 This means, it is not possible to define additional methods in a class, nor to perform specialization (a language feature that monomorphizes a polymorphically declared type and defines a dedicated method, as in C++).
@@ -2115,9 +2073,7 @@ assert Point2D.new({x = 1; y = 2}).norm() == 5
 Point3D = Class {x = Int; y = Int; z = Int}
 assert Point3D.new({x = 1; y = 2; z = 3}).norm() == 14 # AssertionError:
 </code></pre>
-<p align='center'>
-    <a href='./06_nst_vs_sst.md'>Previous</a> | <a href='./08_value.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="value-type"><a class="header" href="#value-type">Value Type</a></h1>
 <p>Value types are Erg built-in types that can be evaluated at compile time, specifically:</p>
 <pre><code class="language-erg">Value = (
@@ -3099,9 +3055,7 @@ And the <code>IteratorImpl</code> patch is the core of the iteration functionali
 <p>Types such as <code>Iterable</code> that provide an interface for handling traits (in this case <code>Iterator</code>) in a static dispatch yet unified manner are called companion class adapters.</p>
 <hr />
 <p><span id="1" style="font-size:x-small"><sup>1</sup> There doesn't seem to be a uniform name for this pattern, but in Rust, there is [companion struct pattern]( https://gist.github.com/qnighy/be99c2ece6f3f4b1248608a04e104b38#:~:text=%E3%82%8F%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%80%82-,companion%20struct,-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A8%E3%80%81%E3 %81%9D%E3%81%AE), and was named after it. <a href="16_iterator.html#f1">↩</a> </span></p>
-<p align='center'>
-    <a href='./15_type.md'>Previous</a> | <a href='./17_mutability.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mutability"><a class="header" href="#mutability">Mutability</a></h1>
 <p>As we have already seen, all Erg variables are immutable. However, Erg objects have the concept of mutability.
 Take the following code as an example.</p>
@@ -3172,9 +3126,7 @@ Identifiers of the form <code>x[y]</code> are called Subscript Accessors.</p>
 <p>The difference between a variable and an identifier is that if we are talking about a variable in the sense of Erg's grammatical theory, the two are in effect the same.
 In C, types and functions cannot be assigned to variables; int and main are identifiers, but not variables (strictly speaking, they can be assigned, but there are restrictions).
 However, in Erg, &quot;everything is an object&quot;. Not only functions and types, but even operators can be assigned to variables.</p>
-<p align='center'>
-    <a href='./16_iterator.md'>Previous</a> | <a href='./18_memory_management.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ownership-system"><a class="header" href="#ownership-system">Ownership System</a></h1>
 <p>Since Erg is a language that uses Python as its host language, its method of memory management is dependent on the Python implementation.
 Semantically, however, Erg's memory management is different from that of Python. The most noticeable differences appear in the ownership system and the prohibition of circular references.</p>
@@ -3253,9 +3205,7 @@ This means that it is not possible to pack references into arrays or create clas
 <p>However, such restrictions are common in languages without references, so they are not that inconvenient.</p>
 <h2 id="circular-references"><a class="header" href="#circular-references">Circular references</a></h2>
 <p>Erg is designed to prevent unintentional memory leaks, and the memory checker will generate an error when it detects a circular reference. In most cases, this error can be resolved with a weak reference <code>Weak</code>. However, this does not allow the creation of objects with circular structures such as cyclic graphs, so we plan to implement an API that can create circular references as an unsafe operation.</p>
-<p align='center'>
-    <a href='./17_mutability.md'>Previous</a> | <a href='./19_visibility.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="visibility"><a class="header" href="#visibility">Visibility</a></h1>
 <p>Erg variables have the concept of <strong>visibility</strong>.
 All variables we have seen so far are called <strong>private variables</strong>. These are variables that are invisible to the outside world.
@@ -3395,9 +3345,7 @@ _ = foo.record.a.x # VisibilityError
 _ = foo.record.a.y # VisibilityError
 _ = foo.record.a.z # OK
 </code></pre>
-<p align='center'>
-     <a href='./18_memory_management.md'>Previous</a> | <a href='./20_naming_rule.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="naming-conventions"><a class="header" href="#naming-conventions">Naming Conventions</a></h1>
 <p>If a variable is to be used as a constant expression, it must begin with a capital letter. The second and succeeding letters may be in lowercase.</p>
 <pre><code class="language-erg">i: Option Type = Int
@@ -3427,9 +3375,7 @@ This is used when calling the API (FFI) of other languages such as Python.</p>
 <pre><code class="language-erg">'∂/∂t' y
 'test 1: pass x to y'()
 </code></pre>
-<p align='center'>
-    <a href='./19_visibility.md'>Previous</a> | <a href='./21_lambda.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="anonymous-function"><a class="header" href="#anonymous-function">Anonymous Function</a></h1>
 <p>An anonymous function is a syntax for creating function objects on the fly without naming them.</p>
 <pre><code class="language-erg"># `-&gt;` is the anonymous function operator
@@ -3493,9 +3439,7 @@ match res2:
 <pre><code class="language-erg"># same as id|T| x: T = x
 id = |T| x: T -&gt; x
 </code></pre>
-<p align='center'>
-    <a href='./20_naming_rule.md'>Previous</a> | <a href='./22_subroutine.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="subroutine-signatures"><a class="header" href="#subroutine-signatures">Subroutine Signatures</a></h1>
 <h2 id="func"><a class="header" href="#func">Func</a></h2>
 <pre><code class="language-erg">some_func(x: T, y: U) -&gt; V
@@ -3531,9 +3475,7 @@ For methods that do not have <code>ref!</code>, i.e., are deprived of ownership 
 `_+_`(x: Foo, y: Foo) = x.a + y.a
 `-_`(x: Foo) = Foo.new(-x.a)
 </code></pre>
-<p align='center'>
-    <a href='./21_lambda.md'>Previous</a> | <a href='./23_scope.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="closure"><a class="header" href="#closure">Closure</a></h1>
 <p>Erg subroutines have a &quot;closure&quot; feature that captures external variables.</p>
 <pre><code class="language-erg">outer = 1
@@ -3599,9 +3541,7 @@ sum = (1..10).fold(init: 0, f: (acc, i) -&gt; acc + i)
 assert sum == 45
 </code></pre>
 <p>Erg is designed to be a natural and concise description of programming with invariant objects.</p>
-<p align='center'>
-    <a href='./22_subroutine.md'>Previous</a> | <a href='./24_module.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="module"><a class="header" href="#module">module</a></h1>
 <p>Erg allows you to think of the file itself as a single record. This is called a module.</p>
 <pre><code class="language-erg: foo.er"># foo.er
@@ -3627,9 +3567,7 @@ assert foo.i == 1
      ├─ baz.er
      └─ qux.er
 </code></pre>
-<p align='center'>
-     <a href='./23_closure.md'>Previous</a> | <a href='./25_object_system.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="object-system"><a class="header" href="#object-system">Object System</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pattern-matching-irrefutability"><a class="header" href="#pattern-matching-irrefutability">Pattern matching, Irrefutability</a></h1>
 <h2 id="patterns-available-in-erg"><a class="header" href="#patterns-available-in-erg">Patterns Available in Erg</a></h2>
@@ -3775,9 +3713,7 @@ The non-unique form is non-trivial, whether it works correctly or is equivalent 
 <h4 id="set-1"><a class="header" href="#set-1">Set</a></h4>
 <p>There is no pattern for sets. There is no pattern for sets because there is no way to retrieve elements uniquely.
 They can be retrieved with an iterator, but the order is not guaranteed.</p>
-<p align='center'>
-    <a href='./25_object_system.md'>Previous</a> | <a href='./27_comprehension.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="comprehension"><a class="header" href="#comprehension">Comprehension</a></h1>
 <p>An array can be created by <code>[expr | (name &lt;- iterable)+ (predicate)*]</code>,
 And a set can be created by <code>{expr | (name &lt;- iterable)+ (predicate)*}</code>.</p>
@@ -3812,9 +3748,7 @@ In the case of a refinement type, Name is limited to one and the layout cannot b
 # Nat2D = {(I, J): (Int, Int) | I &gt;= 0; J &gt;= 0}
 Nat2D = {(I, J): (Int, Int) | I &gt;= 0 and J &gt;= 0}
 </code></pre>
-<p align='center'>
-    <a href='./26_pattern_matching.md'>Previous</a> | <a href='./28_spread_syntax.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="spread-assignment"><a class="header" href="#spread-assignment">Spread assignment</a></h1>
 <p>In a spread assignment, a variable can be prefixed with <code>...</code> in front of the variable, all the remaining elements can be expanded into the variable. This is called a spread assignment.</p>
 <pre><code class="language-erg">[x, ... .y] = [1, 2, 3]
@@ -3839,9 +3773,7 @@ Extract assignment is a useful syntax for bringing certain attributes local to a
 {*} = record
 assert x == 1 and y == 2
 </code></pre>
-<p align='center'>
-    <a href='./27_comprehension.md'>Previous</a> | <a href='./29_decorator.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="decorator"><a class="header" href="#decorator">Decorator</a></h1>
 <p>Decorators are used to add or make explicit a specific state or behavior for a type or function.
 The syntax for decorators is as follows.</p>
@@ -3913,9 +3845,7 @@ assert Y in U.attaches
 <p>Indicates that the variable is outdated and deprecated.</p>
 <h2 id="test"><a class="header" href="#test">Test</a></h2>
 <p>Indicates a subroutine for tests. Test subroutines are executed with the <code>erg test</code> command.</p>
-<p align='center'>
-    <a href='./28_spread_syntax.md'>Previous</a> | <a href='./30_error_handling.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h1>
 <p>Mainly uses Result type.
 Erg will throw away Error type objects (not supported at top level).</p>
@@ -3995,9 +3925,7 @@ Unrecoverable errors are errors caused by external factors such as software/hard
 <p>Panicking is done with the <code>panic</code> function.</p>
 <pre><code class="language-erg">panic &quot;something went wrong!&quot;
 </code></pre>
-<p align='center'>
-    <a href='./29_decorator.md'>Previous</a> | <a href='./31_pipeline.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pipeline-operator"><a class="header" href="#pipeline-operator">Pipeline Operator</a></h1>
 <p>The pipeline operator is used like this:</p>
 <pre><code class="language-erg">assert f(g(x)) == (x |&gt; g |&gt; f)
@@ -4017,9 +3945,7 @@ _evens = 1..100\
     .filter i -&gt; i % 2 == 0 \
     .collect Array
 </code></pre>
-<p align='center'>
-    <a href='./30_error_handling.md'>Previous</a> | <a href='./32_integration_with_Python.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="integration-with-python"><a class="header" href="#integration-with-python">Integration with Python</a></h1>
 <p>All objects imported from Python are by default of type <code>Object</code>. Since no comparisons can be made at this point, it is necessary to refine the type.</p>
 <h2 id="type-specification-in-the-standard-library"><a class="header" href="#type-specification-in-the-standard-library">Type Specification in the Standard Library</a></h2>
@@ -4057,9 +3983,7 @@ assert foo.bar(1) in Int
         y
 </code></pre>
 <p>Since this is a runtime overhead, a project is planned to statically type analyze Python scripts with Erg's type system.</p>
-<p align='center'>
-    <a href='./31_pipeline.md'>Previous</a> | <a href='./33_package_system.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="package-system"><a class="header" href="#package-system">Package System</a></h1>
 <p>Erg packages can be roughly classified into the app package, which is the application, and the lib package, which is the library.
 The entry point of the app package is <code>src/app.er</code>. The <code>main</code> function defined in <code>app.er</code> is executed.
@@ -4120,9 +4044,7 @@ bar.baz # AttributeError: module 'baz' is private
 <pre><code class="language-erg"># qux.er
 baz = import &quot;baz&quot;
 </code></pre>
-<p align='center'>
-    <a href='./32_integration_with_Python.md'>Previous</a> | <a href='./34_generator.md'>Next</a>
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="generator"><a class="header" href="#generator">Generator</a></h1>
 <p>Generators are special procedures that use the <code>yield!</code> procedure in a block.</p>
 <pre><code class="language-erg">g!() =
@@ -4145,9 +4067,7 @@ assert g!() == 3
     yield! 3
 make_g: () =&gt; Generator!
 </code></pre>
-<p align='center'>
-    <a href='./33_package_system.md'>Previous</a> | Next
-</p>
+
 <div style="break-before: page; page-break-before: always;"></div><h1 id="index"><a class="header" href="#index">Index</a></h1>
 <p>For APIs not in this index, see <a href="./API/index.html">here</a>.
 For the meaning of terms, see <a href="./dev_guide/terms.html">here</a> for the meaning of terms.</p>

@@ -2,7 +2,7 @@
 authors = ["Shunsuke Shibayama"]
 language = "en"
 multilingual = false
-src = "src"
+src = "syntax"
 title = "The Erg Book"
 
 [build]

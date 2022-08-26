@@ -20,8 +20,10 @@ def replace_links(html):
 def main():
     pth = glob('docs/*.html')
     typ_pth = glob('docs/type/*.html')
-    paths = pth + typ_pth
+    typ_adv_pth = glob('docs/type/advanced/*.html')
+    paths = pth + typ_pth + typ_adv_pth
     for path in paths:
+        print(path)
         html = open_file(path)
         html = remove_links(html)
         save_file(path, html)
