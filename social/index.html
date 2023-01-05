@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Social | Erg Programming Language </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    
+    <style>
+    :root {
+        --front-color: #007d9c7e;
+        /* Primary theme color */
+        --primary-color: #00a597;
+        /* Primary theme text color */
+        --primary-text-color: #0000009c;
+        /* Primary theme link color */
+        --primary-link-color: #14b4a6;
+        /* Secondary color: the background body color */
+        --secondary-color: #8cb5b9a8;
+        --secondary-text-color: #000000;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #00cab9;
+    }
+</style>
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="https://erg-lang.org/juice.css">
+    
+<!-- Juice references /normalize.css, which doesn't work, so we reference ./normalics.css here -->
+<link rel="stylesheet" type="text/css" href="/style.css" />
+<link rel="stylesheet" type="text/css" href="/juice-modified.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/logo.svg" />
+
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;erg-lang.org&#x2F;">
+    <div class="logo">
+        <img src="https://erg-lang.org/logo.svg" alt="logo">
+        
+    </div>
+</a>
+
+<nav>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;erg-lang.org&#x2F;docs&#x2F;">Docs</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;erg-lang.org&#x2F;social&#x2F;">Social</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;erg-lang.org&#x2F;download&#x2F;">Download</a>
+    
+    
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;erg-lang">Github</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;erg-lang.org&#x2F;web-ide">Playground</a>
+        
+    
+</nav>
+
+</header>
+
+
+    <main>
+        
+
+
+
+
+<div class="toc">
+    <div class="toc-sticky">
+        
+        <div class="toc-item">
+            <a class="subtext" href="https://erg-lang.org/social/#official">Official</a>
+        </div>
+        
+        <div class="toc-item">
+            <a class="subtext" href="https://erg-lang.org/social/#third-party">Third Party</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+        <div class="content text">
+            
+<div class="heading-text">Social</div>
+<h1 id="official">Official</h1>
+<h2 id="discord"><a href="https://discord.gg/zfAAUbgGr4">Discord</a></h2>
+<h2 id="github-discussions"><a href="https://github.com/erg-lang/erg/discussions">Github Discussions</a></h2>
+<h1 id="third-party">Third Party</h1>
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+<footer>
+    <small class="subtext">
+        Maintained by the Erg Team
+    </small>
+</footer>
+
+</body>
+<script>
+    const scrollHandler = entries => {
+        // Find the first entry which intersecting and ratio > 0.9 to highlight.
+        let entry = entries.find(entry => {
+            return entry.isIntersecting && entry.intersectionRatio > 0.9;
+        });
+        if (!entry) return;
+
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // let url = new URL(`#${entry.target.id}`);
+        let link = document.querySelector(`.toc a[href$="${decodeURIComponent(`#${entry.target.id}`)}"]`)
+        if (link) {
+            link.classList.add("active");
+            link.scrollIntoView({ behavior: "auto", block: "nearest" });
+        }
+    };
+    // Set -100px root margin to improve highlight experience.
+    const observer = new IntersectionObserver(scrollHandler, { threshold: 1 });
+    let items = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    items.forEach(item => observer.observe(item));
+</script>
+
+</html>
