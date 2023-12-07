@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Erg Programming Language</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    
+    <style>
+    :root {
+        /* Primary theme color */
+        --primary-color: #3dafb7;
+        /* Primary theme text color */
+        --primary-text-color: #000000c0;
+        --primary-text-color-over: #000000bc;
+        /* Primary theme link color */
+        --primary-link-color: #dda013;
+        /* Secondary color: the background body color */
+        --secondary-color: #ffe8b967;
+        --secondary-text-color: #303030;
+
+        --shadow-color: #ddd;
+        /* Font used for headers (h1 & h2) */
+        --header-font-family: 'Kumbh Sans', sans-serif;
+        /* Font used for text */
+        --text-font-family: 'Ubuntu', sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            /* Primary theme color */
+            --primary-color: #1a646e;
+            /* Primary theme text color */
+            --primary-text-color: #d7d7d7;
+            --primary-text-color-over: #ababab4e;
+            /* Primary theme link color */
+            --primary-link-color: #376a9acf;
+            /* Secondary color: the background body color */
+            --secondary-color: #282828e0;
+            --secondary-text-color: #f2f2f2;
+            /* Highlight text color of table of content */
+            --toc-highlight-text-color: #f2f2f2;
+            --toc-background-color: #3a3a3a;
+
+            --shadow-color: #202020;
+            /* Font used for headers (h1 & h2) */
+            --header-font-family: 'Kumbh Sans', sans-serif;
+            /* Font used for text */
+            --text-font-family: 'Ubuntu', sans-serif;
+        }
+    }
+</style>
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="https://erg-lang.org/juice.css">
+    
+<!-- Juice references /normalize.css, which doesn't work, so we reference ./normalics.css here -->
+<link rel="stylesheet" type="text/css" href="/style.css" />
+<link rel="stylesheet" type="text/css" href="/juice-modified.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/logo.svg" />
+
+</head>
+
+<body>
+    
+
+    <header class="pos-absolute" style="background-color: transparent">
+        
+
+<a href="https://erg-lang.org/">
+    <div class="logo">
+        <img src="https://erg-lang.org/logo.svg" alt="logo">
+        
+    </div>
+</a>
+
+<nav>
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/docs/">Docs</a>
+    
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/install/">Install</a>
+    
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/social/">Social</a>
+    
+    
+    
+        
+        <a class="nav-item subtitle-text" href="https://github.com/erg-lang">Github</a>
+        
+    
+</nav>
+
+    </header>
+
+    <div class="hero">
+        
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<section class="text-center">
+    <h1 class="heading-text" style="font-size: 50px">
+        Erg Programming Language
+    </h1>
+    <h3 class="title-text">
+        A statically typed language that can deeply improve the Python ecosystem.
+    </h3>
+    <div>
+        <a class="github-button" href="https://github.com/erg-lang/erg" data-size="large" data-show-count="true"
+            aria-label="Star erg-lang/erg on GitHub">Star</a>
+        <a class="github-button" href="https://github.com/sponsors/erg-lang" data-size="large" data-icon="octicon-heart"
+            aria-label="Sponsor @erg-lang on GitHub">Sponsor</a>
+        <a href="https://erg-lang.org/web-ide/" data-size="large">
+            <img src="https://img.shields.io/static/v1?style=for-the-badge&label=&message=playground&color=green">
+        </a>
+    </div>
+</section>
+<img class="hero-image" style="width: 50%" src="https://erg-lang.org/code.png">
+
+<div class="explore-more text" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+    Explore Erg ⇩
+</div>
+<style>
+    .hero section {
+        padding: 0 5rem;
+    }
+
+    @media screen and (max-width: 768px) {
+        .hero section {
+            padding: 0 2rem;
+        }
+
+        .hero-image {
+            display: none
+        }
+    }
+</style>
+
+    </div>
+
+    
+
+    <main>
+        
+
+
+
+
+<div class="toc">
+    <div class="toc-sticky">
+        
+        <div class="toc-item">
+            <a class="subtext" href="https://erg-lang.org/#features">Features</a>
+        </div>
+        
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#robustness"><small>- Robustness</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#simplicity-consistency"><small>- Simplicity &amp; Consistency</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#readability"><small>- Readability</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#multi-paradigm"><small>- Multi Paradigm</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#maintainability"><small>- Maintainability</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#programmer-friendly"><small>- Programmer Friendly</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#interoperability-with-python"><small>- Interoperability with Python</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/#multiple-backends"><small>- Multiple Backends</small></a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+        <div class="content text">
+            
+            <div id="features" class="heading-text">Overview</div>
+            <h1 id="features">Features</h1>
+<h2 id="robustness"><strong>Robustness</strong></h2>
+<p>Erg has a strong type system and comfortable compiler support. For example, it has dependent types and refinement types. These types strongly encode pre-conditions, invariant conditions, etc. into the code.</p>
+<h2 id="simplicity-consistency"><strong>Simplicity &amp; Consistency</strong></h2>
+<p>Erg consists of a very simple and consistent syntax, which can significantly reduce the amount of code compared to other languages. However, its functionality is not inferior to them.
+Since the type inference system is powerful, you can code like a dynamically typed language.</p>
+<h2 id="readability"><strong>Readability</strong></h2>
+<p>In addition to the readability of the syntax itself, Erg defines a rich set of methods and functions by default to improve code readability.</p>
+<h2 id="multi-paradigm"><strong>Multi Paradigm</strong></h2>
+<p>Functional &amp; Object-Oriented</p>
+<h2 id="maintainability"><strong>Maintainability</strong></h2>
+<p>Erg requires some kinds of markers to be placed on code that causes side effects or changes internal state, which can localize the complexity of code. This will greatly improve the maintainability of your code.</p>
+<h2 id="programmer-friendly"><strong>Programmer Friendly</strong></h2>
+<p>Erg is committed to providing error messages that are easy to read and various development tools. Erg also provide multilingual support for error messages, etc.</p>
+<h2 id="interoperability-with-python"><strong>Interoperability with Python</strong></h2>
+<p>Erg code can be compiled into Python bytecode. This means you have zero-cost access to your Python assets with Erg.</p>
+<h2 id="multiple-backends"><strong>Multiple Backends</strong></h2>
+<ul>
+<li>CPython</li>
+<li><strong>WIP</strong> Rust (The compiler is called Gal, also optimized to Erg's specifications)</li>
+<li><strong>WIP</strong> Dyne (Python compatible bytecode interpreter, optimized to Erg's specifications, static types and the ownership system etc.)</li>
+</ul>
+
+            
+        </div>
+
+        
+        
+    </main>
+
+    
+<footer>
+    <small class="subtext">
+        Maintained by the Erg Team
+    </small>
+</footer>
+
+</body>
+<script>
+    const scrollHandler = entries => {
+        // Find the first entry which intersecting and ratio > 0.9 to highlight.
+        let entry = entries.find(entry => {
+            return entry.isIntersecting && entry.intersectionRatio > 0.9;
+        });
+        if (!entry) return;
+
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // let url = new URL(`#${entry.target.id}`);
+        let link = document.querySelector(`.toc a[href$="${decodeURIComponent(`#${entry.target.id}`)}"]`)
+        if (link) {
+            link.classList.add("active");
+            link.scrollIntoView({ behavior: "auto", block: "nearest" });
+        }
+    };
+    // Set -100px root margin to improve highlight experience.
+    const observer = new IntersectionObserver(scrollHandler, { threshold: 1 });
+    let items = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    items.forEach(item => observer.observe(item));
+</script>
+
+</html>

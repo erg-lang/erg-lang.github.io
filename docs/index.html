@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Docs | Erg Programming Language </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    
+    <style>
+    :root {
+        /* Primary theme color */
+        --primary-color: #3dafb7;
+        /* Primary theme text color */
+        --primary-text-color: #000000c0;
+        --primary-text-color-over: #000000bc;
+        /* Primary theme link color */
+        --primary-link-color: #dda013;
+        /* Secondary color: the background body color */
+        --secondary-color: #ffe8b967;
+        --secondary-text-color: #303030;
+
+        --shadow-color: #ddd;
+        /* Font used for headers (h1 & h2) */
+        --header-font-family: 'Kumbh Sans', sans-serif;
+        /* Font used for text */
+        --text-font-family: 'Ubuntu', sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            /* Primary theme color */
+            --primary-color: #1a646e;
+            /* Primary theme text color */
+            --primary-text-color: #d7d7d7;
+            --primary-text-color-over: #ababab4e;
+            /* Primary theme link color */
+            --primary-link-color: #376a9acf;
+            /* Secondary color: the background body color */
+            --secondary-color: #282828e0;
+            --secondary-text-color: #f2f2f2;
+            /* Highlight text color of table of content */
+            --toc-highlight-text-color: #f2f2f2;
+            --toc-background-color: #3a3a3a;
+
+            --shadow-color: #202020;
+            /* Font used for headers (h1 & h2) */
+            --header-font-family: 'Kumbh Sans', sans-serif;
+            /* Font used for text */
+            --text-font-family: 'Ubuntu', sans-serif;
+        }
+    }
+</style>
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="https://erg-lang.org/juice.css">
+    
+<!-- Juice references /normalize.css, which doesn't work, so we reference ./normalics.css here -->
+<link rel="stylesheet" type="text/css" href="/style.css" />
+<link rel="stylesheet" type="text/css" href="/juice-modified.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/logo.svg" />
+
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https://erg-lang.org/">
+    <div class="logo">
+        <img src="https://erg-lang.org/logo.svg" alt="logo">
+        
+    </div>
+</a>
+
+<nav>
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/docs/">Docs</a>
+    
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/install/">Install</a>
+    
+    
+    
+    
+    <a class="nav-item subtitle-text" href="https://erg-lang.org/social/">Social</a>
+    
+    
+    
+        
+        <a class="nav-item subtitle-text" href="https://github.com/erg-lang">Github</a>
+        
+    
+</nav>
+
+</header>
+
+
+    <main>
+        
+
+
+
+
+<div class="toc">
+    <div class="toc-sticky">
+        
+        <div class="toc-item">
+            <a class="subtext" href="https://erg-lang.org/docs/#official">Official</a>
+        </div>
+        
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/docs/#the-erg-book"><small>- The Erg Book</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/docs/#erg-dev-guide"><small>- Erg Dev Guide</small></a>
+        </div>
+        
+        <div class="toc-item-child">
+            <a class="subtext" href="https://erg-lang.org/docs/#all-official-documentation-including-faq"><small>- All official documentation (including FAQ)</small></a>
+        </div>
+        
+        
+        
+        <div class="toc-item">
+            <a class="subtext" href="https://erg-lang.org/docs/#third-party">Third Party</a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+        <div class="content text">
+            
+<div class="heading-text">Docs</div>
+<h1 id="official">Official</h1>
+<p>Current official documents provide EN, JA, zh_CN and zh_TW translations.</p>
+<h2 id="the-erg-book"><a href="https://erg-lang.org/the-erg-book">The Erg Book</a></h2>
+<h2 id="erg-dev-guide"><a href="https://erg-lang.org/dev-guide">Erg Dev Guide</a></h2>
+<h2 id="all-official-documentation-including-faq"><a href="https://github.com/erg-lang/erg/tree/main/doc">All official documentation (including FAQ)</a></h2>
+<h1 id="third-party">Third Party</h1>
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+<footer>
+    <small class="subtext">
+        Maintained by the Erg Team
+    </small>
+</footer>
+
+</body>
+<script>
+    const scrollHandler = entries => {
+        // Find the first entry which intersecting and ratio > 0.9 to highlight.
+        let entry = entries.find(entry => {
+            return entry.isIntersecting && entry.intersectionRatio > 0.9;
+        });
+        if (!entry) return;
+
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // let url = new URL(`#${entry.target.id}`);
+        let link = document.querySelector(`.toc a[href$="${decodeURIComponent(`#${entry.target.id}`)}"]`)
+        if (link) {
+            link.classList.add("active");
+            link.scrollIntoView({ behavior: "auto", block: "nearest" });
+        }
+    };
+    // Set -100px root margin to improve highlight experience.
+    const observer = new IntersectionObserver(scrollHandler, { threshold: 1 });
+    let items = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    items.forEach(item => observer.observe(item));
+</script>
+
+</html>
